@@ -1,0 +1,65 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    margin: 10px;
+    padding-left: 20px;
+
+    border: solid thin gray;
+}
+
+nav {
+    margin: 10px;
+
+    line-height: 180%;
+    text-align: center;
+
+    border: solid thin gray;
+}
+
+#mainSection {
+    margin: 10px;
+}
+
+aside {
+    float: left;
+
+    border: solid thin gray;
+}
+
+#chat {
+    float: left;
+
+    margin-left: 10px;
+}
+
+.history {
+    width: 300px;
+    height: 200px;
+
+    border: solid thin gray;
+}
+
+.input {
+}
+
+.btnSend {
+}
+
+footer {
+    clear: both;
+
+    margin: 10px;
+
+    line-height: 180%;
+    text-align: center;
+
+    border: solid thin gray;
+}
+
+.clearDiv {
+    height: 0;
+    clear: both;
+}
