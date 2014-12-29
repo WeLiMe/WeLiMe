@@ -19,7 +19,7 @@
 </nav>
 
 <main id="mainSection">
-    <aside>
+    <aside id="friendList">
         <ul>
             <li><a href="#">All</a></li>
         </ul>
@@ -27,12 +27,12 @@
 
     <div id="chat">
         <label for="txtHistory"></label>
-        <textarea rows="5" cols="30" id="txtHistory"></textarea>
+        <textarea class="history" id="txtHistory"></textarea>
 
         <br/>
 
         <label for="txtInput"></label>
-        <input type="text" id="txtInput"/>
+        <input type="text" class="input" id="txtInput"/>
 
         <button class="btnSend">Send</button>
     </div>
