@@ -11,7 +11,8 @@ require_once __DIR__ . '/../app/Bootstrap.php';
     <meta charset="UTF-8">
     <title>WeLiMe</title>
 
-    <link href="css/style.css" rel="stylesheet">
+    <link rel="shortcut icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 
 <body>
