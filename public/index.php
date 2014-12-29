@@ -1,3 +1,9 @@
+<?php
+
+require_once __DIR__ . '/../app/Bootstrap.php';
+
+?>
+
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 
@@ -14,7 +20,7 @@
 </header>
 
 <nav>
-    <a href="./index.php">Home</a>&emsp;|&emsp;
+    <a href="index.php">Home</a>&emsp;|&emsp;
     <a href="#">About</a>
 </nav>
 
