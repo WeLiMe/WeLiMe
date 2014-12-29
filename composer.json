@@ -1,7 +1,21 @@
 {
+    "name": "WeLiMe",
+    "authors": [
+        {
+            "name": "Achilleas Naoumidis",
+            "email": "anaumidis@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "": "lib/"
+        }
+    },
     "require": {
-        "league/plates": "~3.1",
-        "doctrine/orm": "2.3.6",
-        "monolog/monolog": "1.11.0"
+        "league/plates": "3.1.0",
+        "doctrine/orm": "v2.4.7",
+        "monolog/monolog": "1.11.0",
+        "phpunit/phpunit": "4.4.1"
     }
 }
