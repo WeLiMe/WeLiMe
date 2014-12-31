@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>WeLiMe</title>
 
-    <link rel="shortcut icon" href="images/favicon.ico"/>
+    <link rel="icon" href="images/favicon.ico"/>
     <link rel="stylesheet" href="css/style.css"/>
 </head>
 
