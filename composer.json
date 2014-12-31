@@ -5,6 +5,11 @@
             "name": "Achilleas Naoumidis",
             "email": "anaumidis@gmail.com",
             "role": "Developer"
+        },
+        {
+            "name": "George Stifanoudis",
+            "email": "geostif@gmail.com",
+            "role": "Developer"
         }
     ],
     "autoload": {
