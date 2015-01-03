@@ -8,7 +8,7 @@
 
     <?php require_once __DIR__ . "/templates/head.php"; ?>
 
-    <link rel="Stylesheet" href="css/chat.css"/>
+    <link rel="Stylesheet" href="css/templates/chat.css"/>
 </head>
 
 <body>
