@@ -28,7 +28,7 @@ a:hover
 
 header {
     margin: 10px;
-    padding-left: 20px;
+    padding-left: 10px;
 
     border-bottom: solid thin gray;
 }
@@ -48,6 +48,11 @@ nav {
 
 main {
     margin: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    border-left: solid thin gray;
+    border-right: solid thin gray;
 }
 
 /* Footer */

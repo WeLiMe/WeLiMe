@@ -32,7 +32,7 @@
         <label for="txtInput"></label>
         <input type="text" class="input" id="txtInput"/>
 
-        <button class="btnSend">Send</button>
+        <input type="submit" class="btnSend" value="Send"/>
     </div>
 
     <div class="clearDiv"></div>

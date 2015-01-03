@@ -1,24 +1,27 @@
 main aside {
     float: left;
 
-    border: solid thin gray;
+    width: 150px;
 }
 
 main .chat {
     float: left;
 
     margin-left: 10px;
+
+    width: 200px;
 }
 
 main .chat .history {
-    width: 300px;
+    width: 200px;
     height: 200px;
 
     border: solid thin gray;
 }
 
 main .chat .input {
+    width: 144px;
 }
 
-.btnSend {
+main .chat .btnSend {
 }
