@@ -1,0 +1,24 @@
+aside {
+    float: left;
+
+    border: solid thin gray;
+}
+
+#chat {
+    float: left;
+
+    margin-left: 10px;
+}
+
+.history {
+    width: 300px;
+    height: 200px;
+
+    border: solid thin gray;
+}
+
+.input {
+}
+
+.btnSend {
+}

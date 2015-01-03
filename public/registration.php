@@ -4,11 +4,11 @@
 <html lang="en">
 
 <head>
-    <title>WeLiMe : Home</title>
+    <title>WeLiMe : Registration</title>
 
     <?php require_once __DIR__ . "/templates/head.php"; ?>
 
-    <link rel="Stylesheet" href="css/index.css"/>
+    <link rel="Stylesheet" href="css/registration.css"/>
 </head>
 
 <body>
@@ -17,7 +17,7 @@
 <?php require_once __DIR__ . "/templates/nav.php"; ?>
 
 <main id="mainSection">
-    <h3>Welcome to our WebLiveMessenger...</h3>
+
 </main>
 
 <?php require_once __DIR__ . "/templates/footer.php"; ?>

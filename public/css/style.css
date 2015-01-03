@@ -1,14 +1,39 @@
 body {
     margin: 0;
-    padding: 0;
+
+    width: auto;
+
+    color: #232323;
+
+    font-family: Verdana, Tahoma, Arial, serif;
+    /*line-height: 150%;*/
+    font-size: 13px;
 }
+
+/* Elements */
+
+a:link, a:active, a:visited
+{
+    color: #323232;
+    text-decoration: none;
+}
+
+a:hover
+{
+    color: #36F;
+    text-decoration: underline;
+}
+
+/* Header */
 
 header {
     margin: 10px;
     padding-left: 20px;
 
-    border: solid thin gray;
+    border-bottom: solid thin gray;
 }
+
+/* Navigation */
 
 nav {
     margin: 10px;
@@ -19,34 +44,13 @@ nav {
     border: solid thin gray;
 }
 
+/* Main Section */
+
 #mainSection {
     margin: 10px;
 }
 
-aside {
-    float: left;
-
-    border: solid thin gray;
-}
-
-#chat {
-    float: left;
-
-    margin-left: 10px;
-}
-
-.history {
-    width: 300px;
-    height: 200px;
-
-    border: solid thin gray;
-}
-
-.input {
-}
-
-.btnSend {
-}
+/* Footer */
 
 footer {
     clear: both;
@@ -56,8 +60,10 @@ footer {
     line-height: 180%;
     text-align: center;
 
-    border: solid thin gray;
+    border-top: solid thin gray;
 }
+
+/* Utils */
 
 .clearDiv {
     height: 0;
