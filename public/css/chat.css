@@ -1,23 +1,23 @@
-aside {
+main aside {
     float: left;
 
     border: solid thin gray;
 }
 
-#chat {
+main .chat {
     float: left;
 
     margin-left: 10px;
 }
 
-.history {
+main .chat .history {
     width: 300px;
     height: 200px;
 
     border: solid thin gray;
 }
 
-.input {
+main .chat .input {
 }
 
 .btnSend {

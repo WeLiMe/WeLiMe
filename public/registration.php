@@ -16,8 +16,7 @@
 
 <?php require_once __DIR__ . "/templates/nav.php"; ?>
 
-<main id="mainSection">
-
+<main>
 </main>
 
 <?php require_once __DIR__ . "/templates/footer.php"; ?>

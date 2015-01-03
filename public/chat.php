@@ -16,14 +16,14 @@
 
 <?php require_once __DIR__ . "/templates/nav.php"; ?>
 
-<main id="mainSection">
+<main>
     <aside id="friendList">
         <ul>
             <li><a href="#">All</a></li>
         </ul>
     </aside>
 
-    <div id="chat">
+    <div class="chat">
         <label for="txtHistory"></label>
         <textarea class="history" id="txtHistory"></textarea>
 

@@ -16,7 +16,7 @@
 
 <?php require_once __DIR__ . "/templates/nav.php"; ?>
 
-<main id="mainSection">
+<main>
     <h3>Welcome to our WebLiveMessenger...</h3>
 </main>
 
