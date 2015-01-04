@@ -6,73 +6,42 @@
  * Time: 8:16 PM
  */
 
-namespace WeLiMe\Entities;
+namespace WeLiMe\Models\Entities;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\GeneratedValue;
-use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\JoinTable;
-use Doctrine\ORM\Mapping\ManyToMany;
-use Doctrine\ORM\Mapping\OneToMany;
-
-/** @Entity */
 class User
 {
     /**
-     * @Id()
-     * @Column(type="integer")
-     * @GeneratedValue(strategy="AUTO")
      * @var int
      */
     private $id;
 
     /**
-     * @Column(type="string", length=255)
      * @var string
      */
     private $username;
 
     /**
-     * @Column(type="string", length=255)
      * @var string
      */
     private $firstName;
 
     /**
-     * @Column(type="string", length=255)
      * @var string
      */
     private $lastName;
 
     /**
-     * @Column(type="string", length=255)
      * @var string
      */
     private $email;
 
     /**
-     * @Column(type="string", length=255)
      * @var string
      */
     private $password;
 
-    /**
-     * @OneToMany(targetEntity="Message", mappedBy="user")
-     */
-    private $messages;
-
-    /**
-     * @ManyToMany(targetEntity="Conversation", inversedBy="users")
-     * @JoinTable(name="Users_Conversations")
-     */
-    private $conversations;
-
     function __construct()
     {
-        $this->messages = new ArrayCollection();
-        $this->conversations = new ArrayCollection();
     }
 
     /**
@@ -81,6 +50,14 @@ class User
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -161,37 +138,5 @@ class User
     public function setPassword($password)
     {
         $this->password = $password;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMessages()
-    {
-        return $this->messages;
-    }
-
-    /**
-     * @param mixed $messages
-     */
-    public function setMessages($messages)
-    {
-        $this->messages = $messages;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getConversations()
-    {
-        return $this->conversations;
-    }
-
-    /**
-     * @param mixed $conversations
-     */
-    public function setConversations($conversations)
-    {
-        $this->conversations = $conversations;
     }
 }
