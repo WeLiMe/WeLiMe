@@ -11,16 +11,24 @@ require_once __DIR__ . '/../../bootstrap.php';
 use WeLiMe\Controllers\UserController;
 use WeLiMe\Models\HTMLFormData\RegistrationForm;
 
-$userController = new UserController();
+session_start();
 
-$registrationForm = new RegistrationForm(
-    $_POST['txtUsername'],
-    $_POST['txtFirstName'],
-    $_POST['txtLastName'],
-    $_POST['txtEmail'],
-    $_POST['txtEmailConfirm'],
-    $_POST['txtPassword'],
-    $_POST['txtPasswordConfirm']
-);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $registrationForm = new RegistrationForm(
+        $_POST['txtUsername'],
+        $_POST['txtFirstName'],
+        $_POST['txtLastName'],
+        $_POST['txtEmail'],
+        $_POST['txtEmailConfirm'],
+        $_POST['txtPassword'],
+        $_POST['txtPasswordConfirm']
+    );
 
-$userController->createUser($registrationForm);
+    $userController = new UserController();
+
+    $userController->createUser($registrationForm);
+
+    $_SESSION['login_user'] = $registrationForm->getUsername();
+}
+
+header("Location: ../../public/index.php");

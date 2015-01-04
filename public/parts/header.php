@@ -1,3 +1,3 @@
 <header>
-    <h1>WiLiMe</h1>
+    <h1>WeLiMe</h1>
 </header>

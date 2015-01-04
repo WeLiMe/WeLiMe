@@ -23,12 +23,12 @@ class Message
     /**
      * @var int
      */
-    private $messageId;
+    private $conversationId;
 
     /**
-     * @var int
+     * @var string
      */
-    private $conversationId;
+    private $content;
 
     function __construct()
     {
@@ -69,22 +69,6 @@ class Message
     /**
      * @return int
      */
-    public function getMessageId()
-    {
-        return $this->messageId;
-    }
-
-    /**
-     * @param int $messageId
-     */
-    public function setMessageId($messageId)
-    {
-        $this->messageId = $messageId;
-    }
-
-    /**
-     * @return int
-     */
     public function getConversationId()
     {
         return $this->conversationId;
@@ -96,5 +80,21 @@ class Message
     public function setConversationId($conversationId)
     {
         $this->conversationId = $conversationId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
     }
 }

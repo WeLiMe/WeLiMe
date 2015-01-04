@@ -39,14 +39,33 @@ nav {
     margin: 10px;
 
     line-height: 180%;
-    text-align: center;
 
     border: solid thin gray;
+}
+
+nav #navigation {
+    float: left;
+
+    margin: 0;
+    padding-left: 10px;
+
+    text-align: left;
+}
+
+nav #actions {
+    float: right;
+
+    margin: 0;
+    padding-right: 10px;
+
+    text-align: right;
 }
 
 /* Main Section */
 
 main {
+    clear: both;
+
     margin: 10px;
     padding-left: 10px;
     padding-right: 10px;

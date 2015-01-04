@@ -9,6 +9,7 @@
 namespace WeLiMe\Repositories;
 
 use PDO;
+use WeLiMe\Exceptions\RepositoryExceptions\UserNotFoundException;
 use WeLiMe\PDOConnection;
 use WeLiMe\Models\Entities\User;
 
@@ -41,8 +42,9 @@ class UserRepository {
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return User
+     * @throws UserNotFoundException
      */
     public function findById($id)
     {
@@ -51,6 +53,37 @@ class UserRepository {
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 
         $stmt->execute();
+
+        if ($stmt->rowCount() == 0) throw new UserNotFoundException();
+
+        $row = $stmt->fetch();
+
+        $user = new User();
+
+        $user->setId($row['id']);
+        $user->setUsername($row['username']);
+        $user->setFirstName($row['first_name']);
+        $user->setLastName($row['last_name']);
+        $user->setEmail($row['email']);
+        $user->setPassword($row['password']);
+
+        return $user;
+    }
+
+    /**
+     * @param string $username
+     * @return User
+     * @throws UserNotFoundException
+     */
+    public function findByUsername($username)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM User WHERE `username` = :username LIMIT 1");
+
+        $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() == 0) throw new UserNotFoundException;
 
         $row = $stmt->fetch();
 

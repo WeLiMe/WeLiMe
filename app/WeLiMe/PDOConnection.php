@@ -9,6 +9,8 @@
 namespace WeLiMe;
 
 use PDO;
+use PDOException;
+use WeLiMe\Exceptions\DatabaseExceptions\DatabaseConnectionException;
 
 class PDOConnection
 {
@@ -23,9 +25,13 @@ class PDOConnection
     {
         static $instance = null;
         if (null === $instance) {
-            $instance = new PDO('mysql:host=localhost;dbname=3270_3277_3269_3312_3441;charset=utf8', 'root', '');
-            $instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $instance->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            try {
+                $instance = new PDO('mysql:host=localhost;dbname=3270_3277_3269_3312_3441;charset=utf8', 'root', '');
+                $instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $instance->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            } catch (PDOException $e) {
+                throw new DatabaseConnectionException($e->getMessage(), (int) $e->getCode());
+            }
         }
 
         return $instance;

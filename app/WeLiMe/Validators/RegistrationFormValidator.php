@@ -8,6 +8,7 @@
 
 namespace WeLiMe\Validators;
 
+use WeLiMe\Exceptions\ValidationExceptions\ValidationException;
 use WeLiMe\Models\HTMLFormData\RegistrationForm;
 
 class RegistrationFormValidator
@@ -15,15 +16,30 @@ class RegistrationFormValidator
     /**
      * @param RegistrationForm $registrationForm
      * @return bool
+     * @throws ValidationException
      */
     public function validate(RegistrationForm $registrationForm) {
-        $usernameIsValid = $this->validateUsername($registrationForm->getUsername());
-        $firstNameIsValid = $this->validateName($registrationForm->getFirstName());
-        $lastNameIsValid = $this->validateName($registrationForm->getLastName());
-        $emailIsValid = $this->validateEmails($registrationForm->getEmail(), $registrationForm->getEmailConfirm());
-        $passwordIsValid = $this->validatePasswords($registrationForm->getPassword(), $registrationForm->getPasswordConfirm());
+        if ($this->validateUsername($registrationForm->getUsername()) == false) {
+            throw new ValidationException("Username validation failed.");
+        }
 
-        return $usernameIsValid and $firstNameIsValid and $lastNameIsValid and $emailIsValid and $passwordIsValid;
+        if ($this->validateName($registrationForm->getFirstName()) == false) {
+            throw new ValidationException("First Name validation failed.");
+        }
+
+        if ($this->validateName($registrationForm->getLastName()) == false) {
+            throw new ValidationException("Last Name validation failed.");
+        }
+
+        if ($this->validateEmails($registrationForm->getEmail(), $registrationForm->getEmailConfirm()) == false) {
+            throw new ValidationException("Email validation failed.");
+        }
+
+        if ($this->validatePasswords($registrationForm->getPassword(), $registrationForm->getPasswordConfirm()) == false) {
+            throw new ValidationException("Password validation failed.");
+        }
+
+        return true;
     }
 
     /**
@@ -33,7 +49,7 @@ class RegistrationFormValidator
     private function validateUsername($data) {
         $isValid = false;
 
-        $pattern = '/^[a-zA-Z]+$/';
+        $pattern = '/^[a-zA-Z0-9_]+$/';
 
         if (preg_match($pattern, $data) == 1) {
             $isValid = true;
@@ -98,23 +114,13 @@ class RegistrationFormValidator
      */
     private function validatePassword($data)
     {
-        $hasCharacter = false;
-        $hasNumber = false;
-        $hasSymbol = false;
+        $isValid = false;
 
-        if (preg_match('/[a-zA-Z]/', $data) == 1) {
-            $hasCharacter = true;
+        if (preg_match('/.+/', $data) == 1) {
+            $isValid = true;
         }
 
-        if (preg_match('/[0-1]/', $data) == 1) {
-            $hasNumber = true;
-        }
-
-        if (preg_match('/[~!@#\$%\^&\*\(\)]/', $data) == 1) {
-            $hasNumber = true;
-        }
-
-        return $hasCharacter and $hasNumber and $hasSymbol;
+        return $isValid;
     }
 
     /**

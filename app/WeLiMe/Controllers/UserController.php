@@ -8,7 +8,12 @@
 
 namespace WeLiMe\Controllers;
 
+use WeLiMe\Exceptions\SecurityExceptions\AuthenticationException;
+use WeLiMe\Exceptions\DatabaseExceptions\DatabaseConnectionException;
+use WeLiMe\Exceptions\RepositoryExceptions\UserNotFoundException;
+use WeLiMe\Exceptions\ValidationExceptions\ValidationException;
 use WeLiMe\Models\Entities\User;
+use WeLiMe\Models\HTMLFormData\LoginForm;
 use WeLiMe\Models\HTMLFormData\RegistrationForm;
 use WeLiMe\Repositories\UserRepository;
 use WeLiMe\Validators\RegistrationFormValidator;
@@ -19,16 +24,23 @@ class UserController
 
     function __construct()
     {
-        $this->userRepository = new UserRepository();
+        try {
+            $this->userRepository = new UserRepository();
+        } catch (DatabaseConnectionException $e) {
+            die($e->getMessage());
+        }
     }
 
+    /**
+     * @param RegistrationForm $registrationForm
+     */
     public function createUser(RegistrationForm $registrationForm)
     {
         $registrationFormValidator = new RegistrationFormValidator();
 
-        $formDataIsValid = $registrationFormValidator->validate($registrationForm);
+        try {
+            $registrationFormValidator->validate($registrationForm);
 
-        if ($formDataIsValid == true) {
             $user = new User();
 
             $user->setUsername($registrationForm->getUsername());
@@ -38,9 +50,28 @@ class UserController
             $user->setPassword($registrationForm->getPassword());
 
             $this->userRepository->save($user);
+        } catch (ValidationException $e) {
+            die($e->getMessage() . '\n' . $e->getTraceAsString());
+        }
+    }
+
+    /**
+     * @param LoginForm $loginForm
+     * @return bool
+     * @throws AuthenticationException
+     */
+    public function checkLogin(LoginForm $loginForm)
+    {
+        try {
+            $user = $this->userRepository->findByUsername($loginForm->getUsername());
+
+            if ($user->getPassword() != $loginForm->getPassword()) {
+                throw new AuthenticationException();
+            }
 
             return true;
-        } else {
+        } catch (UserNotFoundException $e) {
+            echo($e->getMessage() . '\n' . $e->getTraceAsString());
             return false;
         }
     }
