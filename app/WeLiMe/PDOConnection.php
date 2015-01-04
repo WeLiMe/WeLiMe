@@ -50,7 +50,7 @@ class PDOConnection
     }
 
     /**
-     * Private unserialize method to prevent unserializing of the *Singleton*
+     * Private unserialize method to prevent unserializing of the *PDOConnection*
      * instance.
      *
      * @return void
