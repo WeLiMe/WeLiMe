@@ -17,7 +17,7 @@ class PDOConnection
      *
      * @staticvar PDOConnection $instance The *PDOConnection* instances of this class.
      *
-     * @return PDO The *Singleton* instance.
+     * @return PDO The *PDOConnection* instance.
      */
     public static function getConnection()
     {
@@ -25,6 +25,7 @@ class PDOConnection
         if (null === $instance) {
             $instance = new PDO('mysql:host=localhost;dbname=3270_3277_3269_3312_3441;charset=utf8', 'root', '');
             $instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $instance->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         }
 
         return $instance;
