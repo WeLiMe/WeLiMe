@@ -11,6 +11,7 @@ namespace WeLiMe\Controllers;
 use WeLiMe\Models\Entities\User;
 use WeLiMe\Models\HTMLFormData\RegistrationForm;
 use WeLiMe\Repositories\UserRepository;
+use WeLiMe\Validators\RegistrationFormValidator;
 
 class UserController
 {
@@ -23,26 +24,24 @@ class UserController
 
     public function createUser(RegistrationForm $registrationForm)
     {
-        $user = new User();
+        $registrationFormValidator = new RegistrationFormValidator();
 
-        $user->setUsername($registrationForm->getUsername());
-        $user->setFirstName($registrationForm->getFirstName());
-        $user->setLastName($registrationForm->getLastName());
+        $formDataIsValid = $registrationFormValidator->validate($registrationForm);
 
-        $emailOrigin = $registrationForm->getEmail();
-        $emailConfirm = $registrationForm->getEmailConfirm();
+        if ($formDataIsValid == true) {
+            $user = new User();
 
-        if ($emailOrigin == $emailConfirm) {
-            $user->setEmail($emailOrigin);
+            $user->setUsername($registrationForm->getUsername());
+            $user->setFirstName($registrationForm->getFirstName());
+            $user->setLastName($registrationForm->getLastName());
+            $user->setEmail($registrationForm->getEmail());
+            $user->setPassword($registrationForm->getPassword());
+
+            $this->userRepository->save($user);
+
+            return true;
+        } else {
+            return false;
         }
-
-        $passwordOrigin = $registrationForm->getPassword();
-        $passwordConfirm = $registrationForm->getPasswordConfirm();
-
-        if ($passwordOrigin == $passwordConfirm) {
-            $user->setPassword($passwordOrigin);
-        }
-
-        $this->userRepository->save($user);
     }
 }
