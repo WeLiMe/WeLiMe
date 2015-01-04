@@ -8,17 +8,19 @@
 
 require_once __DIR__ . '/../../bootstrap.php';
 
-use WeLiMe\Models\Entities\User;
 use WeLiMe\Controllers\UserController;
-
-$user = new User();
-
-$user->setUsername($_POST['txtUsername']);
-$user->setFirstName($_POST['txtFirstName']);
-$user->setLastName($_POST['txtLastName']);
-$user->setEmail($_POST['txtEmail']);
-$user->setPassword($_POST['txtPassword']);
+use WeLiMe\Models\HTMLFormData\RegistrationForm;
 
 $userController = new UserController();
 
-$userController->createUser($user);
+$registrationForm = new RegistrationForm(
+    $_POST['txtUsername'],
+    $_POST['txtFirstName'],
+    $_POST['txtLastName'],
+    $_POST['txtEmail'],
+    $_POST['txtEmailConfirm'],
+    $_POST['txtPassword'],
+    $_POST['txtPasswordConfirm']
+);
+
+$userController->createUser($registrationForm);

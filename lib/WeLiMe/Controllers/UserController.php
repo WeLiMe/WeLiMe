@@ -9,6 +9,7 @@
 namespace WeLiMe\Controllers;
 
 use WeLiMe\Models\Entities\User;
+use WeLiMe\Models\HTMLFormData\RegistrationForm;
 use WeLiMe\Repositories\UserRepository;
 
 class UserController
@@ -20,12 +21,28 @@ class UserController
         $this->userRepository = new UserRepository();
     }
 
-    public function createUser(User $user)
+    public function createUser(RegistrationForm $registrationForm)
     {
-        $this->userRepository->save($user);
-    }
+        $user = new User();
 
-    public function deleteUser(User $user)
-    {
+        $user->setUsername($registrationForm->getUsername());
+        $user->setFirstName($registrationForm->getFirstName());
+        $user->setLastName($registrationForm->getLastName());
+
+        $emailOrigin = $registrationForm->getEmail();
+        $emailConfirm = $registrationForm->getEmailConfirm();
+
+        if ($emailOrigin == $emailConfirm) {
+            $user->setEmail($emailOrigin);
+        }
+
+        $passwordOrigin = $registrationForm->getPassword();
+        $passwordConfirm = $registrationForm->getPasswordConfirm();
+
+        if ($passwordOrigin == $passwordConfirm) {
+            $user->setPassword($passwordOrigin);
+        }
+
+        $this->userRepository->save($user);
     }
 }
