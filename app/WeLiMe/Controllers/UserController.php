@@ -41,13 +41,14 @@ class UserController
         try {
             $registrationFormValidator->validate($registrationForm);
 
-            $user = new User();
-
-            $user->setUsername($registrationForm->getUsername());
-            $user->setFirstName($registrationForm->getFirstName());
-            $user->setLastName($registrationForm->getLastName());
-            $user->setEmail($registrationForm->getEmail());
-            $user->setPassword($registrationForm->getPassword());
+            $user = new User(
+                0,
+                $registrationForm->getUsername(),
+                $registrationForm->getFirstName(),
+                $registrationForm->getLastName(),
+                $registrationForm->getEmail(),
+                $registrationForm->getPassword()
+            );
 
             $this->userRepository->save($user);
         } catch (ValidationException $e) {

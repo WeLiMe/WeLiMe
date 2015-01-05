@@ -30,8 +30,18 @@ class Message
      */
     private $content;
 
-    function __construct()
+    /**
+     * @param int $id
+     * @param int $userId
+     * @param int $conversationId
+     * @param string $content
+     */
+    function __construct($id = 0, $userId = 0, $conversationId = 0, $content = "")
     {
+        $this->id = $id;
+        $this->userId = $userId;
+        $this->conversationId = $conversationId;
+        $this->content = $content;
     }
 
     /**

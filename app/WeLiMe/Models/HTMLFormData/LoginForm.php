@@ -15,7 +15,11 @@ class LoginForm {
     /** @var string */
     private $password;
 
-    function __construct($username, $password)
+    /**
+     * @param string $username
+     * @param string $password
+     */
+    function __construct($username = "", $password = "")
     {
         $this->username = $username;
         $this->password = $password;

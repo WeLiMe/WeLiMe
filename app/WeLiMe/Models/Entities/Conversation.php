@@ -20,8 +20,14 @@ class Conversation
      */
     private $name;
 
-    function __construct()
+    /**
+     * @param int $id
+     * @param string $name
+     */
+    function __construct($id = 0, $name = "")
     {
+        $this->id = $id;
+        $this->name = $name;
     }
 
     /**

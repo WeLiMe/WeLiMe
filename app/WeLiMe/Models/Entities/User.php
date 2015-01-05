@@ -40,8 +40,22 @@ class User
      */
     private $password;
 
-    function __construct()
+    /**
+     * @param int $id
+     * @param string $username
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $email
+     * @param string $password
+     */
+    function __construct($id = 0, $username = "", $firstName = "", $lastName = "", $email = "", $password = "")
     {
+        $this->id = $id;
+        $this->username = $username;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->email = $email;
+        $this->password = $password;
     }
 
     /**

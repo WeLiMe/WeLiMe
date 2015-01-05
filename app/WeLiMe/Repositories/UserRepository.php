@@ -58,14 +58,14 @@ class UserRepository {
 
         $row = $stmt->fetch();
 
-        $user = new User();
-
-        $user->setId($row['id']);
-        $user->setUsername($row['username']);
-        $user->setFirstName($row['first_name']);
-        $user->setLastName($row['last_name']);
-        $user->setEmail($row['email']);
-        $user->setPassword($row['password']);
+        $user = new User(
+            $row['id'],
+            $row['username'],
+            $row['first_name'],
+            $row['last_name'],
+            $row['email'],
+            $row['password']
+        );
 
         return $user;
     }
@@ -87,14 +87,14 @@ class UserRepository {
 
         $row = $stmt->fetch();
 
-        $user = new User();
-
-        $user->setId($row['id']);
-        $user->setUsername($row['username']);
-        $user->setFirstName($row['first_name']);
-        $user->setLastName($row['last_name']);
-        $user->setEmail($row['email']);
-        $user->setPassword($row['password']);
+        $user = new User(
+            $row['id'],
+            $row['username'],
+            $row['first_name'],
+            $row['last_name'],
+            $row['email'],
+            $row['password']
+        );
 
         return $user;
     }

@@ -30,7 +30,16 @@ class RegistrationForm {
     /** @var string */
     private $passwordConfirm;
 
-    function __construct($username, $firstName, $lastName, $email, $emailConfirm, $password, $passwordConfirm)
+    /**
+     * @param string $username
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $email
+     * @param string $emailConfirm
+     * @param string $password
+     * @param string $passwordConfirm
+     */
+    function __construct($username = "", $firstName = "", $lastName = "", $email = "", $emailConfirm = "", $password = "", $passwordConfirm = "")
     {
         $this->username = $username;
         $this->firstName = $firstName;
