@@ -30,7 +30,7 @@ header {
     margin: 10px;
     padding-left: 10px;
 
-    height: 50px;
+    height: 45px;
 
     border-bottom: solid thin gray;
 }
@@ -38,11 +38,9 @@ header {
 header #logo {
     float: left;
 
-    margin: 0;
-    padding-top: 3px;
-
     font-size: 30px;
     font-weight: bold;
+    font-style: italic;
 }
 
 /* Navigation */
