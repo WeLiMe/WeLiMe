@@ -54,7 +54,7 @@ class UserRepository {
 
         $stmt->execute();
 
-        if ($stmt->rowCount() == 0) throw new UserNotFoundException();
+        if ($stmt->rowCount() == 0) throw new UserNotFoundException("User not found with id:" . $id . ".");
 
         $row = $stmt->fetch();
 
@@ -83,7 +83,7 @@ class UserRepository {
 
         $stmt->execute();
 
-        if ($stmt->rowCount() == 0) throw new UserNotFoundException;
+        if ($stmt->rowCount() == 0) throw new UserNotFoundException("User not found with username:" . $username . ".");
 
         $row = $stmt->fetch();
 

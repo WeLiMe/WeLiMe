@@ -52,7 +52,7 @@ class UserController
 
             $this->userRepository->save($user);
         } catch (ValidationException $e) {
-            die($e->getMessage() . '\n' . $e->getTraceAsString());
+            die($e->getMessage());
         }
     }
 
@@ -67,13 +67,10 @@ class UserController
             $user = $this->userRepository->findByUsername($loginForm->getUsername());
 
             if (!password_verify($loginForm->getPassword(), $user->getPassword())) {
-                throw new AuthenticationException();
+                throw new AuthenticationException("Authentication failed.");
             }
-
-            return true;
         } catch (UserNotFoundException $e) {
-            echo($e->getMessage() . '\n' . $e->getTraceAsString());
-            return false;
+            die($e->getMessage());
         }
     }
 }
