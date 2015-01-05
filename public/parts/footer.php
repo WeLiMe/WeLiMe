@@ -1,3 +1,3 @@
 <footer>
-    Copyright &copy; 2014, All Rights Reserved
+    Copyright &copy; 2015, All Rights Reserved
 </footer>

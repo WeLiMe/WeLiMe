@@ -27,8 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userController = new UserController();
 
     $userController->createUser($registrationForm);
-
-    $_SESSION['login_user'] = $registrationForm->getUsername();
 }
 
 header("Location: ../../public/index.php");
