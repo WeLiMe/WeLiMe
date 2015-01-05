@@ -17,7 +17,7 @@ $userRepository = new UserRepository();
 try {
     $userRepository->findByUsername($username);
 
-    echo("\tHi, " . $_SESSION['login_user'] . "!&emsp;|&emsp;\n");
+    echo("\tHi, <a href=\"\">" . $_SESSION['login_user'] . "</a>!&emsp;|&emsp;\n");
     echo("\t<a href=\"logout.php\">Logout</a>\n");
 } catch (UserNotFoundException $e) {
     echo("\t<a href=\"login.php\">Login</a>&emsp;|&emsp;\n");

@@ -21,7 +21,7 @@ a:link, a:active, a:visited
 a:hover
 {
     color: #36F;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 /* Header */
@@ -30,7 +30,19 @@ header {
     margin: 10px;
     padding-left: 10px;
 
+    height: 50px;
+
     border-bottom: solid thin gray;
+}
+
+header #logo {
+    float: left;
+
+    margin: 0;
+    padding-top: 3px;
+
+    font-size: 30px;
+    font-weight: bold;
 }
 
 /* Navigation */

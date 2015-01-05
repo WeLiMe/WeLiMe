@@ -1,3 +1,3 @@
 <header>
-    <h1>WeLiMe</h1>
+    <div id="logo"><i>We<span style="color: #36F;">.</span>Li<span style="color: #36F;">.</span>Me</i></div>
 </header>
