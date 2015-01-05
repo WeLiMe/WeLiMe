@@ -23,10 +23,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Conversation`
+-- Table structure for table `conversation`
 --
 
-CREATE TABLE IF NOT EXISTS `Conversation` (
+CREATE TABLE IF NOT EXISTS `conversation` (
   `id` int(11) NOT NULL,
   `name` varchar(45) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -34,10 +34,10 @@ CREATE TABLE IF NOT EXISTS `Conversation` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Message`
+-- Table structure for table `message`
 --
 
-CREATE TABLE IF NOT EXISTS `Message` (
+CREATE TABLE IF NOT EXISTS `message` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `conversation_id` int(11) NOT NULL,
@@ -47,10 +47,10 @@ CREATE TABLE IF NOT EXISTS `Message` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `User`
+-- Table structure for table `user`
 --
 
-CREATE TABLE IF NOT EXISTS `User` (
+CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL,
   `username` varchar(45) COLLATE utf8_bin NOT NULL,
   `first_name` varchar(45) COLLATE utf8_bin NOT NULL,
@@ -62,10 +62,10 @@ CREATE TABLE IF NOT EXISTS `User` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `UserConversation`
+-- Table structure for table `user_conversation`
 --
 
-CREATE TABLE IF NOT EXISTS `UserConversation` (
+CREATE TABLE IF NOT EXISTS `user_conversation` (
   `user_id` int(11) NOT NULL,
   `conversation_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -75,65 +75,65 @@ CREATE TABLE IF NOT EXISTS `UserConversation` (
 --
 
 --
--- Indexes for table `Conversation`
+-- Indexes for table `conversation`
 --
-ALTER TABLE `Conversation`
+ALTER TABLE `conversation`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `Message`
+-- Indexes for table `message`
 --
-ALTER TABLE `Message`
-  ADD PRIMARY KEY (`id`), ADD KEY `fk_Message_User_id_idx` (`user_id`), ADD KEY `fk_Message_Conversation_id_idx` (`conversation_id`);
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`id`), ADD KEY `fk_message_user_id_idx` (`user_id`), ADD KEY `fk_message_conversation_id_idx` (`conversation_id`);
 
 --
--- Indexes for table `User`
+-- Indexes for table `user`
 --
-ALTER TABLE `User`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `username_UNIQUE` (`username`), ADD UNIQUE KEY `email_UNIQUE` (`email`);
 
 --
--- Indexes for table `UserConversation`
+-- Indexes for table `user_conversation`
 --
-ALTER TABLE `UserConversation`
-  ADD PRIMARY KEY (`user_id`,`conversation_id`), ADD KEY `fk_UserConversation_Conversation_id_idx` (`conversation_id`);
+ALTER TABLE `user_conversation`
+  ADD PRIMARY KEY (`user_id`,`conversation_id`), ADD KEY `fk_user_conversation_conversation_id_idx` (`conversation_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `Conversation`
+-- AUTO_INCREMENT for table `conversation`
 --
-ALTER TABLE `Conversation`
+ALTER TABLE `conversation`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `Message`
+-- AUTO_INCREMENT for table `message`
 --
-ALTER TABLE `Message`
+ALTER TABLE `message`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `User`
+-- AUTO_INCREMENT for table `user`
 --
-ALTER TABLE `User`
+ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `Message`
+-- Constraints for table `message`
 --
-ALTER TABLE `Message`
-ADD CONSTRAINT `fk_Message_Conversation_id` FOREIGN KEY (`conversation_id`) REFERENCES `Conversation` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_Message_User_id` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `message`
+ADD CONSTRAINT `fk_message_conversation_id` FOREIGN KEY (`conversation_id`) REFERENCES `conversation` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `fk_message_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `UserConversation`
+-- Constraints for table `user_conversation`
 --
-ALTER TABLE `UserConversation`
-ADD CONSTRAINT `fk_UserConversation_Conversation_id` FOREIGN KEY (`conversation_id`) REFERENCES `Conversation` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_UserConversation_User_id` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `user_conversation`
+ADD CONSTRAINT `fk_user_conversation_conversation_id` FOREIGN KEY (`conversation_id`) REFERENCES `conversation` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `fk_user_conversation_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

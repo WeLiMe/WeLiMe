@@ -11,8 +11,6 @@ require_once __DIR__ . '/../../bootstrap.php';
 use WeLiMe\Controllers\UserController;
 use WeLiMe\Models\HTMLFormData\RegistrationForm;
 
-session_start();
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $registrationForm = new RegistrationForm(
         $_POST['txtUsername'],

@@ -28,7 +28,7 @@ class UserRepository {
     public function save(User $user)
     {
         $stmt = $this->db->prepare(
-            "INSERT INTO User(`username`, `first_name`, `last_name`, `email`, `password`) " .
+            "INSERT INTO user(`username`, `first_name`, `last_name`, `email`, `password`) " .
             "VALUES (:username, :firstName, :lastName, :email, :pass)"
         );
 
@@ -48,7 +48,7 @@ class UserRepository {
      */
     public function findById($id)
     {
-        $stmt = $this->db->prepare("SELECT * FROM User WHERE `id` = :id LIMIT 1");
+        $stmt = $this->db->prepare("SELECT * FROM user WHERE `id` = :id LIMIT 1");
 
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 
@@ -77,7 +77,7 @@ class UserRepository {
      */
     public function findByUsername($username)
     {
-        $stmt = $this->db->prepare("SELECT * FROM User WHERE `username` = :username LIMIT 1");
+        $stmt = $this->db->prepare("SELECT * FROM user WHERE `username` = :username LIMIT 1");
 
         $stmt->bindValue(':username', $username, PDO::PARAM_STR);
 

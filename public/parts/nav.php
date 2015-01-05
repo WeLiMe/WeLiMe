@@ -10,16 +10,20 @@ use WeLiMe\Repositories\UserRepository;
 
 session_start();
 
-$username = $_SESSION['login_user'];
+if (isset($_SESSION['login_user'])) {
+    $username = $_SESSION['login_user'];
 
-$userRepository = new UserRepository();
+    $userRepository = new UserRepository();
 
-try {
-    $userRepository->findByUsername($username);
+    try {
+        $userRepository->findByUsername($username);
 
-    echo("\tHi, <a href=\"\">" . $_SESSION['login_user'] . "</a>!&emsp;|&emsp;\n");
-    echo("\t<a href=\"logout.php\">Logout</a>\n");
-} catch (UserNotFoundException $e) {
+        echo("\tHi, <a href=\"\">" . $_SESSION['login_user'] . "</a>!&emsp;|&emsp;\n");
+        echo("\t<a href=\"logout.php\">Logout</a>\n");
+    } catch (UserNotFoundException $e) {
+        header("Location: logout.php");
+    }
+} else {
     echo("\t<a href=\"login.php\">Login</a>&emsp;|&emsp;\n");
     echo("\t<a href=\"registration.php\">Registration</a>\n");
 }
