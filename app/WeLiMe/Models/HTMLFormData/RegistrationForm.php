@@ -8,7 +8,8 @@
 
 namespace WeLiMe\Models\HTMLFormData;
 
-class RegistrationForm {
+class RegistrationForm
+{
     /** @var string */
     private $username;
 

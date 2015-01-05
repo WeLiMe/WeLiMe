@@ -18,7 +18,8 @@ class RegistrationFormValidator
      * @return bool
      * @throws ValidationException
      */
-    public function validate(RegistrationForm $registrationForm) {
+    public function validate(RegistrationForm $registrationForm)
+    {
         if ($this->validateUsername($registrationForm->getUsername()) == false) {
             throw new ValidationException("Username validation failed.");
         }
@@ -46,7 +47,8 @@ class RegistrationFormValidator
      * @param string $data
      * @return bool
      */
-    private function validateUsername($data) {
+    private function validateUsername($data)
+    {
         $isValid = false;
 
         $pattern = '/^[a-zA-Z0-9_]+$/';
@@ -62,7 +64,8 @@ class RegistrationFormValidator
      * @param string $data
      * @return bool
      */
-    private function validateName($data) {
+    private function validateName($data)
+    {
         $isValid = false;
 
         $pattern = '/^[a-zA-Z]+$/';

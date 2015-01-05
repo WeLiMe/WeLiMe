@@ -9,11 +9,13 @@
 namespace WeLiMe\Repositories;
 
 use PDO;
+use WeLiMe\Exceptions\RepositoryExceptions\ConversationNotFoundException;
 use WeLiMe\Exceptions\RepositoryExceptions\UserNotFoundException;
-use WeLiMe\PDOConnection;
 use WeLiMe\Models\Entities\User;
+use WeLiMe\PDOConnection;
 
-class UserRepository {
+class UserRepository
+{
     private $db;
 
     function __construct()
@@ -23,7 +25,7 @@ class UserRepository {
 
     /**
      * @param User $user
-     * @return bool
+     * @return User
      */
     public function save(User $user)
     {
@@ -32,13 +34,17 @@ class UserRepository {
             "VALUES (:username, :firstName, :lastName, :email, :pass)"
         );
 
-        $stmt->bindValue(':username', $user->getUsername(), PDO::PARAM_STR);
-        $stmt->bindValue(':firstName', $user->getFirstName(), PDO::PARAM_STR);
-        $stmt->bindValue(':lastName', $user->getLastName(), PDO::PARAM_STR);
-        $stmt->bindValue(':email', $user->getEmail(), PDO::PARAM_STR);
-        $stmt->bindValue(':pass', $user->getPassword(), PDO::PARAM_STR);
+        $stmt->bindParam(':username', $user->getUsername(), PDO::PARAM_STR);
+        $stmt->bindParam(':firstName', $user->getFirstName(), PDO::PARAM_STR);
+        $stmt->bindParam(':lastName', $user->getLastName(), PDO::PARAM_STR);
+        $stmt->bindParam(':email', $user->getEmail(), PDO::PARAM_STR);
+        $stmt->bindParam(':pass', $user->getPassword(), PDO::PARAM_STR);
 
-        return $stmt->execute();
+        $stmt->execute();
+
+        $user->setId($this->db->lastInsertId());
+
+        return $user;
     }
 
     /**
@@ -50,21 +56,21 @@ class UserRepository {
     {
         $stmt = $this->db->prepare("SELECT * FROM user WHERE `id` = :id LIMIT 1");
 
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
         $stmt->execute();
 
-        if ($stmt->rowCount() == 0) throw new UserNotFoundException("User not found with id:" . $id . ".");
+        if ($stmt->rowCount() == 0) throw new UserNotFoundException("User not found with id: " . $id . ".");
 
-        $row = $stmt->fetch();
+        $row = $stmt->fetch(PDO::FETCH_OBJ);
 
         $user = new User(
-            $row['id'],
-            $row['username'],
-            $row['first_name'],
-            $row['last_name'],
-            $row['email'],
-            $row['password']
+            $row->id,
+            $row->username,
+            $row->first_name,
+            $row->last_name,
+            $row->email,
+            $row->password
         );
 
         return $user;
@@ -79,23 +85,68 @@ class UserRepository {
     {
         $stmt = $this->db->prepare("SELECT * FROM user WHERE `username` = :username LIMIT 1");
 
-        $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
 
         $stmt->execute();
 
-        if ($stmt->rowCount() == 0) throw new UserNotFoundException("User not found with username:" . $username . ".");
+        if ($stmt->rowCount() == 0) throw new UserNotFoundException("User not found with username: " . $username . ".");
 
-        $row = $stmt->fetch();
+        $row = $stmt->fetch(PDO::FETCH_OBJ);
 
         $user = new User(
-            $row['id'],
-            $row['username'],
-            $row['first_name'],
-            $row['last_name'],
-            $row['email'],
-            $row['password']
+            $row->id,
+            $row->username,
+            $row->first_name,
+            $row->last_name,
+            $row->email,
+            $row->password
         );
 
         return $user;
+    }
+
+    /**
+     * @param $id
+     * @return User[]
+     * @throws ConversationNotFoundException
+     */
+    public function findUsersInConversationById($id)
+    {
+        $stmt = $this->db->prepare(
+            "SELECT * FROM conversation WHERE `id` = :id LIMIT 1"
+        );
+
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount()) throw new ConversationNotFoundException("Conversation not found with id: " . $id . ".");
+
+        $stmt = $this->db->prepare(
+            "SELECT * FROM user WHERE `id` IN (SELECT `user_id` FROM user_conversation WHERE `conversation_id` = :conversationId)"
+        );
+
+        $stmt->bindParam(':conversationId', $id, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        $results = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        $users = array();
+
+        $user = new User();
+
+        foreach ($results as $row) {
+            $user->setId($row->id);
+            $user->setUsername($row->username);
+            $user->setFirstName($row->first_name);
+            $user->setLastName($row->last_name);
+            $user->setEmail($row->email);
+            $user->setPassword($row->password);
+
+            array_push($users, $user);
+        }
+
+        return $users;
     }
 }

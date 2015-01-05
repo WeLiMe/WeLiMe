@@ -43,6 +43,12 @@ header #logo {
     font-style: italic;
 }
 
+header #createConversationForm {
+    float: right;
+
+    padding-top: 5px;
+}
+
 /* Navigation */
 
 nav {

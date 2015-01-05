@@ -30,7 +30,7 @@ class PDOConnection
                 $instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $instance->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
             } catch (PDOException $e) {
-                throw new DatabaseConnectionException($e->getMessage(), (int) $e->getCode());
+                throw new DatabaseConnectionException($e->getMessage(), (int)$e->getCode());
             }
         }
 
