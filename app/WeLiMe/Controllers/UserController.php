@@ -8,9 +8,9 @@
 
 namespace WeLiMe\Controllers;
 
-use WeLiMe\Exceptions\SecurityExceptions\AuthenticationException;
 use WeLiMe\Exceptions\DatabaseExceptions\DatabaseConnectionException;
 use WeLiMe\Exceptions\RepositoryExceptions\UserNotFoundException;
+use WeLiMe\Exceptions\SecurityExceptions\AuthenticationException;
 use WeLiMe\Exceptions\ValidationExceptions\ValidationException;
 use WeLiMe\Models\Entities\User;
 use WeLiMe\Models\HTMLFormData\LoginForm;
@@ -47,7 +47,7 @@ class UserController
                 $registrationForm->getFirstName(),
                 $registrationForm->getLastName(),
                 $registrationForm->getEmail(),
-                $registrationForm->getPassword()
+                password_hash($registrationForm->getPassword(), PASSWORD_BCRYPT)
             );
 
             $this->userRepository->save($user);
@@ -66,7 +66,7 @@ class UserController
         try {
             $user = $this->userRepository->findByUsername($loginForm->getUsername());
 
-            if ($user->getPassword() != $loginForm->getPassword()) {
+            if (!password_verify($loginForm->getPassword(), $user->getPassword())) {
                 throw new AuthenticationException();
             }
 
