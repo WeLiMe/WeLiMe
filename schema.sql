@@ -41,7 +41,8 @@ CREATE TABLE IF NOT EXISTS `message` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `conversation_id` int(11) NOT NULL,
-  `content` varchar(420) COLLATE utf8_bin NOT NULL
+  `content` varchar(420) COLLATE utf8_bin NOT NULL,
+  `sent_time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
