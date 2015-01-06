@@ -120,7 +120,7 @@ class UserRepository
 
         $stmt->execute();
 
-        if ($stmt->rowCount()) throw new ConversationNotFoundException("Conversation not found with id: " . $id . ".");
+        if ($stmt->rowCount() == 0) throw new ConversationNotFoundException("Conversation not found with id: " . $id . ".");
 
         $stmt = $this->db->prepare(
             "SELECT * FROM user WHERE `id` IN (SELECT `user_id` FROM user_conversation WHERE `conversation_id` = :conversationId)"

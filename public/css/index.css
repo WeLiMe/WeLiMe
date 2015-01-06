@@ -1,0 +1,51 @@
+main h2 {
+    text-align: center;
+}
+
+#Chat {
+    margin: 0 auto 20px auto;
+    padding: 0;
+
+    width: 450px;
+
+    border: solid thin gray;
+}
+
+#ChatMessages {
+    width: 450px;
+    height: 350px;
+
+    border-bottom: solid thin gray;
+
+    overflow-y: auto;
+}
+
+#ChatInput {
+    padding-left: 3px;
+
+    width: 446px;
+    height: 20px;
+
+    border: none;
+}
+
+#ChatInput:focus {
+    outline: none;
+}
+
+.ChatMessage {
+    margin: 10px;
+}
+
+.ChatMessageName {
+    color: #36F;
+}
+
+.ChatMessageSentTime {
+    font-size: smaller;
+    font-style: italic;
+}
+
+.ChatMessageContent {
+    font-family: "Tahoma", "sans-serif";
+}

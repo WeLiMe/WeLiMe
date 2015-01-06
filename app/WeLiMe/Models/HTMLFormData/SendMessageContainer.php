@@ -2,21 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: a4i
- * Date: 1/1/15
- * Time: 8:36 PM
+ * Date: 1/5/15
+ * Time: 8:37 PM
  */
 
-namespace WeLiMe\Models\Entities;
+namespace WeLiMe\Models\HTMLFormData;
 
-use DateTime;
-
-class Message
+class SendMessageContainer
 {
-    /**
-     * @var int
-     */
-    private $id;
-
     /**
      * @var int
      */
@@ -33,40 +26,15 @@ class Message
     private $content;
 
     /**
-     * @var string
-     */
-    private $sentTime;
-
-    /**
-     * @param int $id
      * @param int $userId
      * @param int $conversationId
      * @param string $content
-     * @param string $sentTime
      */
-    function __construct($id = 0, $userId = 0, $conversationId = 0, $content = "", $sentTime = null)
+    function __construct($userId = 0, $conversationId = 0, $content = "")
     {
-        $this->id = $id;
         $this->userId = $userId;
         $this->conversationId = $conversationId;
         $this->content = $content;
-        $this->sentTime = $sentTime;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
@@ -115,21 +83,5 @@ class Message
     public function setContent($content)
     {
         $this->content = $content;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSentTime()
-    {
-        return $this->sentTime;
-    }
-
-    /**
-     * @param string $sentTime
-     */
-    public function setSentTime($sentTime)
-    {
-        $this->sentTime = $sentTime;
     }
 }

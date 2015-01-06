@@ -23,8 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userController = new UserController();
 
     try {
-        $userController->checkLogin($loginForm);
-        $_SESSION['login_user'] = $loginForm->getUsername();
+        $user = $userController->checkLogin($loginForm);
+        $_SESSION['UserUsername'] = $user->getUsername();
+        $_SESSION['UserId'] = $user->getId();
     } catch (AuthenticationException $e) {
         die($e->getMessage());
     }

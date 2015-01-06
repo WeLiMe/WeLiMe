@@ -1,6 +1,6 @@
 <header>
     <div id="logo">We<span style="color: #36F;">.</span>Li<span style="color: #36F;">.</span>Me</div>
-    <?php if (isset($_SESSION['login_user'])) { ?>
+    <?php if (isset($_SESSION['UserUsername'])) { ?>
     <div id="createConversationForm">
         <form name="conversationForm" id="conversationForm" action="../app/FormHandlers/ConversationFormHandler.php" method="post">
             <table>

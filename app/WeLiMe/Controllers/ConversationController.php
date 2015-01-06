@@ -54,13 +54,13 @@ class ConversationController
     }
 
     /**
-     * @param $username
+     * @param $id
      * @return bool
      */
-    public function getConversationsByUsername($username)
+    public function getConversationsOfUserById($id)
     {
         try {
-            $conversations = $this->conversationRepository->findConversationsOfUserByUsername($username);
+            $conversations = $this->conversationRepository->findConversationsOfUserById($id);
         } catch (UserNotFoundException $e) {
             die($e->getMessage());
         }

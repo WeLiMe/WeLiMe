@@ -88,26 +88,26 @@ class ConversationRepository
     }
 
     /**
-     * @param $username
+     * @param int $id
      * @return Conversation[]
      */
-    public function findConversationsOfUserByUsername($username)
+    public function findConversationsOfUserById($id)
     {
         $stmt = $this->db->prepare(
-            "SELECT id FROM user WHERE `username` = :username LIMIT 1"
+            "SELECT * FROM user WHERE `id` = :id LIMIT 1"
         );
 
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
         $stmt->execute();
 
-        if ($stmt->rowCount()) throw new UserNotFoundException("User not found with username: " . $username . ".");
+        if ($stmt->rowCount()) throw new UserNotFoundException("User not found with username: " . $id . ".");
 
         $stmt = $this->db->prepare(
-            "SELECT * FROM conversation WHERE `id` IN (SELECT `conversation_id` FROM user_conversation WHERE `user_id` = (SELECT `id` FROM user WHERE `username` = :username LIMIT 1))"
+            "SELECT * FROM conversation WHERE `id` IN (SELECT `conversation_id` FROM user_conversation WHERE `user_id` = :id)"
         );
 
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
         $stmt->execute();
 

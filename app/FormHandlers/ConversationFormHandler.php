@@ -16,7 +16,7 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['txtUsernames'])) {
         $createConversationContainer = new CreateConversationContainer(
-            $_SESSION['login_user'],
+            $_SESSION['UserUsername'],
             $_POST['txtUsernames']
         );
 

@@ -12,20 +12,24 @@ use WeLiMe\Exceptions\DatabaseExceptions\DatabaseConnectionException;
 use WeLiMe\Exceptions\RepositoryExceptions\UserNotFoundException;
 use WeLiMe\Exceptions\SecurityExceptions\AuthenticationException;
 use WeLiMe\Exceptions\ValidationExceptions\ValidationException;
+use WeLiMe\Models\Entities\Conversation;
 use WeLiMe\Models\Entities\User;
 use WeLiMe\Models\HTMLFormData\LoginForm;
 use WeLiMe\Models\HTMLFormData\RegistrationForm;
+use WeLiMe\Repositories\ConversationRepository;
 use WeLiMe\Repositories\UserRepository;
 use WeLiMe\Validators\RegistrationFormValidator;
 
 class UserController
 {
     private $userRepository;
+    private $conversationRepository;
 
     function __construct()
     {
         try {
             $this->userRepository = new UserRepository();
+            $this->conversationRepository = new ConversationRepository();
         } catch (DatabaseConnectionException $e) {
             die($e->getMessage());
         }
@@ -50,7 +54,9 @@ class UserController
                 password_hash($registrationForm->getPassword(), PASSWORD_BCRYPT)
             );
 
-            $this->userRepository->save($user);
+            $user = $this->userRepository->save($user);
+
+            $this->conversationRepository->addUserToConversation($user, new Conversation(1));
         } catch (ValidationException $e) {
             die($e->getMessage());
         }
@@ -58,7 +64,7 @@ class UserController
 
     /**
      * @param LoginForm $loginForm
-     * @return bool
+     * @return User
      * @throws AuthenticationException
      */
     public function checkLogin(LoginForm $loginForm)
@@ -72,5 +78,7 @@ class UserController
         } catch (UserNotFoundException $e) {
             die($e->getMessage());
         }
+
+        return $user;
     }
 }
