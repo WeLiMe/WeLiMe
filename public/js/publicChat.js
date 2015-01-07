@@ -1,43 +1,53 @@
-function updateHistory () {
-    var chatMessagesDiv = $("#ChatMessages");
+function updateHistory() {
+    var chatMessagesElem = $("#ChatMessages");
+    var conversationId = $("#ChatConversationId").val();
+
+    var lastMessageId = chatMessagesElem.find(".ChatMessage:last-child .ChatMessageId:last-child").val();
 
     $.ajax({
         type: 'POST',
         async: true,
         url: '../app/FormHandlers/GetMessagesFormHandler.php',
-        data: {ConversationId:1},
-        success:function (respose) {
-            chatMessagesDiv.html(respose);
-            chatMessagesDiv.scrollTop(chatMessagesDiv.prop("scrollHeight"));
+        data: {
+            ConversationId: conversationId,
+            LastMessageId: lastMessageId
+        },
+        success: function (respose) {
+            if (respose.trim()) {
+                chatMessagesElem.html(chatMessagesElem.html() + respose);
+                chatMessagesElem.scrollTop(chatMessagesElem.prop("scrollHeight"));
+            }
         }
     });
 }
 
 $(document).ready(function () {
-    updateHistory();
+    var chatInputElement = $("#ChatInput");
 
-    setInterval(function () {
-        updateHistory()
-    }, 1500);
-
-    $("#ChatInput").keyup(function (e) {
-        if (e.keyCode == 13) {
-            var ConversationId = $("#txtConversationId").val();
-            var ChatInput = $("#ChatInput").val();
+    chatInputElement.keyup(function (e) {
+        if (e.keyCode == 13 && chatInputElement.val()) {
+            var conversationId = $("#ChatConversationId").val();
+            var chatInput = chatInputElement.val();
 
             $.ajax({
                 type: 'POST',
                 async: true,
                 url: '../app/FormHandlers/SendMessageFormHandler.php',
                 data: {
-                    ConversationId:ConversationId,
-                    ChatInput:ChatInput
+                    ConversationId: conversationId,
+                    ChatInput: chatInput
                 },
-                success:function () {
-                    $("#ChatInput").val("");
+                success: function () {
+                    chatInputElement.val("");
                     updateHistory()
                 }
             });
         }
     });
+
+    updateHistory();
+
+    setInterval(function () {
+        updateHistory()
+    }, 1000);
 });

@@ -8,7 +8,13 @@
 
 namespace WeLiMe\Models\HTMLFormData;
 
-class GetMessagesDTO {
+class GetMessagesDTO
+{
+    /**
+     * @var int
+     */
+    private $id;
+
     /**
      * @var string
      */
@@ -30,13 +36,15 @@ class GetMessagesDTO {
     private $sentTime;
 
     /**
+     * @param int $id
      * @param string $firstName
      * @param string $lastName
      * @param string $content
      * @param string $sentTime
      */
-    function __construct($firstName = "", $lastName = "", $content = "", $sentTime = "")
+    function __construct($id = 0, $firstName = "", $lastName = "", $content = "", $sentTime = "")
     {
+        $this->id = $id;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->content = $content;
@@ -105,5 +113,21 @@ class GetMessagesDTO {
     public function setSentTime($sentTime)
     {
         $this->sentTime = $sentTime;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 }

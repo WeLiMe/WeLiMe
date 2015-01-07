@@ -10,7 +10,7 @@
 
     <link rel="Stylesheet" href="css/index.css"/>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 
     <script type="text/javascript" src="js/publicChat.js"></script>
 </head>
@@ -28,7 +28,7 @@
         <div id="ChatMessages">
         </div>
         <input type="text" id="ChatInput" name="ChatInput" title="ChatInput"/>
-        <input type="hidden" id="txtConversationId" name="txtConversationId" value="1"/>
+        <input type="hidden" id="ChatConversationId" name="ChatConversationId" value="1"/>
     </div>
     <?php } ?>
 </main>

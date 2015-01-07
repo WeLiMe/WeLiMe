@@ -47,12 +47,17 @@ class MessageController
 
     /**
      * @param int $id
+     * @param $messageId
      * @return GetMessagesDTO[]
      */
-    public function getMessagesOfConversation($id)
+    public function getMessagesOfConversation($id, $messageId)
     {
+        if ($messageId == '') {
+            $messageId = 0;
+        }
+
         try {
-            $messages = $this->messageRepository->findAllInConversationById($id);
+            $messages = $this->messageRepository->findAllInConversationByIdAndWithIdGreaterThan($id, $messageId);
         } catch (ConversationNotFoundException $e) {
             die($e->getMessage());
         }
@@ -68,6 +73,7 @@ class MessageController
             }
 
             $messageDTO = new GetMessagesDTO(
+                $message->getId(),
                 $user->getFirstName(),
                 $user->getLastName(),
                 $message->getContent(),

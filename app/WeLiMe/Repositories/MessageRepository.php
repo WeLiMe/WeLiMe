@@ -47,9 +47,10 @@ class MessageRepository
 
     /**
      * @param int $id
+     * @param string $messageId
      * @return Message[]
      */
-    public function findAllInConversationById($id)
+    public function findAllInConversationByIdAndWithIdGreaterThan($id, $messageId)
     {
         $stmt = $this->db->prepare(
             "SELECT * FROM conversation WHERE `id` = :conversationId LIMIT 1"
@@ -62,10 +63,11 @@ class MessageRepository
         if ($stmt->rowCount() == 0) throw new ConversationNotFoundException("Conversation not found with id: " . $id . ".");
 
         $stmt = $this->db->prepare(
-            "SELECT * FROM message WHERE `conversation_id` = :conversationId"
+            "SELECT * FROM message WHERE `conversation_id` = :conversationId and `id` > :messageId"
         );
 
         $stmt->bindParam(':conversationId', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':messageId', $messageId, PDO::PARAM_STR);
 
         $stmt->execute();
 
