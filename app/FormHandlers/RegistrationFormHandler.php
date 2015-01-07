@@ -9,10 +9,10 @@
 require_once __DIR__ . '/../../bootstrap.php';
 
 use WeLiMe\Controllers\UserController;
-use WeLiMe\Models\HTMLFormData\RegistrationForm;
+use WeLiMe\Models\HTMLFormData\RegistrationFormContainer;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $registrationForm = new RegistrationForm(
+    $registrationForm = new RegistrationFormContainer(
         $_POST['txtUsername'],
         $_POST['txtFirstName'],
         $_POST['txtLastName'],
@@ -27,4 +27,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userController->createUser($registrationForm);
 }
 
-header("Location: ../../public/index.php");
+header("Location: ../../public/login.php");

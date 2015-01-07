@@ -12,7 +12,7 @@ use WeLiMe\Exceptions\DatabaseExceptions\DatabaseConnectionException;
 use WeLiMe\Exceptions\RepositoryExceptions\ConversationNotFoundException;
 use WeLiMe\Exceptions\RepositoryExceptions\UserNotFoundException;
 use WeLiMe\Models\Entities\Message;
-use WeLiMe\Models\HTMLFormData\GetMessagesDTO;
+use WeLiMe\Models\HTMLFormData\GetMessagesContainer;
 use WeLiMe\Models\HTMLFormData\SendMessageContainer;
 use WeLiMe\Repositories\MessageRepository;
 use WeLiMe\Repositories\UserRepository;
@@ -48,31 +48,26 @@ class MessageController
     /**
      * @param int $id
      * @param $messageId
-     * @return GetMessagesDTO[]
+     * @return GetMessagesContainer[]
      */
     public function getMessagesOfConversation($id, $messageId)
     {
-        if ($messageId == '') {
-            $messageId = 0;
-        }
-
         try {
-            $messages = $this->messageRepository->findAllInConversationByIdAndWithIdGreaterThan($id, $messageId);
+            $messages = $this->messageRepository->findAllInConversationByIdWithMessageIdGreaterThan($id, $messageId);
         } catch (ConversationNotFoundException $e) {
             die($e->getMessage());
         }
 
-        $messageDTOs = array();
-
+        $messagesContainers = array();
 
         foreach ($messages as $message) {
             try {
-                $user = $this->userRepository->findById($message->getUserId());
+                $user = $this->userRepository->findOneById($message->getUserId());
             } catch (UserNotFoundException $e) {
                 die($e->getMessage());
             }
 
-            $messageDTO = new GetMessagesDTO(
+            $messageContainer = new GetMessagesContainer(
                 $message->getId(),
                 $user->getFirstName(),
                 $user->getLastName(),
@@ -80,9 +75,9 @@ class MessageController
                 $message->getSentTime()
             );
 
-            array_push($messageDTOs, $messageDTO);
+            array_push($messagesContainers, $messageContainer);
         }
 
-        return $messageDTOs;
+        return $messagesContainers;
     }
 }

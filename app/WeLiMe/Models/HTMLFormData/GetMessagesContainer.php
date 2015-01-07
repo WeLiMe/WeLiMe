@@ -8,7 +8,7 @@
 
 namespace WeLiMe\Models\HTMLFormData;
 
-class GetMessagesDTO
+class GetMessagesContainer
 {
     /**
      * @var int

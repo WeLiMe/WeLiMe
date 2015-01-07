@@ -52,7 +52,7 @@ class UserRepository
      * @return User
      * @throws UserNotFoundException
      */
-    public function findById($id)
+    public function findOneById($id)
     {
         $stmt = $this->db->prepare("SELECT * FROM user WHERE `id` = :id LIMIT 1");
 
@@ -81,7 +81,7 @@ class UserRepository
      * @return User
      * @throws UserNotFoundException
      */
-    public function findByUsername($username)
+    public function findOneByUsername($username)
     {
         $stmt = $this->db->prepare("SELECT * FROM user WHERE `username` = :username LIMIT 1");
 
@@ -106,11 +106,11 @@ class UserRepository
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return User[]
      * @throws ConversationNotFoundException
      */
-    public function findUsersInConversationById($id)
+    public function findAllInConversationById($id)
     {
         $stmt = $this->db->prepare(
             "SELECT * FROM conversation WHERE `id` = :id LIMIT 1"

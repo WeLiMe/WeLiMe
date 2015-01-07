@@ -7,7 +7,7 @@
  */
 
 use WeLiMe\Controllers\ConversationController;
-use WeLiMe\Models\HTMLFormData\CreateConversationContainer;
+use WeLiMe\Models\HTMLFormData\CreateConversationFormContainer;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
@@ -15,7 +15,7 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['txtUsernames'])) {
-        $createConversationContainer = new CreateConversationContainer(
+        $createConversationContainer = new CreateConversationFormContainer(
             $_SESSION['UserUsername'],
             $_POST['txtUsernames']
         );

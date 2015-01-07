@@ -9,16 +9,16 @@
 namespace WeLiMe\Validators;
 
 use WeLiMe\Exceptions\ValidationExceptions\ValidationException;
-use WeLiMe\Models\HTMLFormData\RegistrationForm;
+use WeLiMe\Models\HTMLFormData\RegistrationFormContainer;
 
 class RegistrationFormValidator
 {
     /**
-     * @param RegistrationForm $registrationForm
+     * @param RegistrationFormContainer $registrationForm
      * @return bool
      * @throws ValidationException
      */
-    public function validate(RegistrationForm $registrationForm)
+    public function validate(RegistrationFormContainer $registrationForm)
     {
         if ($this->validateUsername($registrationForm->getUsername()) == false) {
             throw new ValidationException("Username validation failed.");

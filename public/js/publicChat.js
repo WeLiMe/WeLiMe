@@ -1,13 +1,17 @@
 function updateHistory() {
     var chatMessagesElem = $("#ChatMessages");
-    var conversationId = $("#ChatConversationId").val();
+    var conversationId = $("#ChatConversationId").html();
 
-    var lastMessageId = chatMessagesElem.find(".ChatMessage:last-child .ChatMessageId:last-child").val();
+    var lastMessageId = chatMessagesElem.find(".ChatMessage:last-child .ChatMessageId").html();
+
+    if (!lastMessageId) {
+        lastMessageId = 0;
+    }
 
     $.ajax({
         type: 'POST',
         async: true,
-        url: '../app/FormHandlers/GetMessagesFormHandler.php',
+        url: '../app/AjaxHandlers/GetMessagesHandler.php',
         data: {
             ConversationId: conversationId,
             LastMessageId: lastMessageId
@@ -25,14 +29,14 @@ $(document).ready(function () {
     var chatInputElement = $("#ChatInput");
 
     chatInputElement.keyup(function (e) {
-        if (e.keyCode == 13 && chatInputElement.val()) {
-            var conversationId = $("#ChatConversationId").val();
+        if (e.keyCode == 13 && chatInputElement.val().trim()) {
+            var conversationId = $("#ChatConversationId").html();
             var chatInput = chatInputElement.val();
 
             $.ajax({
                 type: 'POST',
                 async: true,
-                url: '../app/FormHandlers/SendMessageFormHandler.php',
+                url: '../app/AjaxHandlers/SendMessageHandler.php',
                 data: {
                     ConversationId: conversationId,
                     ChatInput: chatInput

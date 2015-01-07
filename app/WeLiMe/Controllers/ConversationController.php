@@ -11,7 +11,7 @@ namespace WeLiMe\Controllers;
 use WeLiMe\Exceptions\DatabaseExceptions\DatabaseConnectionException;
 use WeLiMe\Exceptions\RepositoryExceptions\UserNotFoundException;
 use WeLiMe\Models\Entities\Conversation;
-use WeLiMe\Models\HTMLFormData\CreateConversationContainer;
+use WeLiMe\Models\HTMLFormData\CreateConversationFormContainer;
 use WeLiMe\Repositories\ConversationRepository;
 use WeLiMe\Repositories\UserRepository;
 
@@ -31,9 +31,9 @@ class ConversationController
     }
 
     /**
-     * @param CreateConversationContainer $createConversationContainer
+     * @param CreateConversationFormContainer $createConversationContainer
      */
-    public function createConversation(CreateConversationContainer $createConversationContainer)
+    public function createConversation(CreateConversationFormContainer $createConversationContainer)
     {
         $usernames = preg_replace('/\s+/', '', $createConversationContainer->getInitiatorUsername() . ", " . $createConversationContainer->getUsernames());
 
@@ -45,7 +45,7 @@ class ConversationController
 
         foreach ($usernamesArray as $username) {
             try {
-                $user = $this->userRepository->findByUsername($username);
+                $user = $this->userRepository->findOneByUsername($username);
                 $this->conversationRepository->addUserToConversation($user, $conversation);
             } catch (UserNotFoundException $e) {
                 // Do nothing...
@@ -54,13 +54,13 @@ class ConversationController
     }
 
     /**
-     * @param $id
-     * @return bool
+     * @param int $id
+     * @return Conversation[]
      */
-    public function getConversationsOfUserById($id)
+    public function getConversationsByUserId($id)
     {
         try {
-            $conversations = $this->conversationRepository->findConversationsOfUserById($id);
+            $conversations = $this->conversationRepository->findAllByUserId($id);
         } catch (UserNotFoundException $e) {
             die($e->getMessage());
         }

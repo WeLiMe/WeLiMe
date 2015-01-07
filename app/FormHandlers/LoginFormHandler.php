@@ -8,14 +8,14 @@
 
 use WeLiMe\Controllers\UserController;
 use WeLiMe\Exceptions\SecurityExceptions\AuthenticationException;
-use WeLiMe\Models\HTMLFormData\LoginForm;
+use WeLiMe\Models\HTMLFormData\LoginFormContainer;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $loginForm = new LoginForm(
+    $loginForm = new LoginFormContainer(
         $_POST['txtUsername'],
         $_POST['txtPassword']
     );

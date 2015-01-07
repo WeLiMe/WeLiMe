@@ -47,10 +47,10 @@ class MessageRepository
 
     /**
      * @param int $id
-     * @param string $messageId
+     * @param int $messageId
      * @return Message[]
      */
-    public function findAllInConversationByIdAndWithIdGreaterThan($id, $messageId)
+    public function findAllInConversationByIdWithMessageIdGreaterThan($id, $messageId)
     {
         $stmt = $this->db->prepare(
             "SELECT * FROM conversation WHERE `id` = :conversationId LIMIT 1"

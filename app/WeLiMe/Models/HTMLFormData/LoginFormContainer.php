@@ -8,7 +8,7 @@
 
 namespace WeLiMe\Models\HTMLFormData;
 
-class LoginForm
+class LoginFormContainer
 {
     /** @var string */
     private $username;

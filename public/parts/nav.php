@@ -14,7 +14,7 @@ if (isset($_SESSION['UserUsername'])) {
     $userRepository = new UserRepository();
 
     try {
-        $userRepository->findByUsername($username);
+        $userRepository->findOneByUsername($username);
 
         echo("\tHi, <a href=\"\">" . $_SESSION['UserUsername'] . "</a>!&emsp;|&emsp;\n");
         echo("\t<a href=\"logout.php\">Logout</a>\n");

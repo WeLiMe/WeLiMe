@@ -14,8 +14,8 @@ use WeLiMe\Exceptions\SecurityExceptions\AuthenticationException;
 use WeLiMe\Exceptions\ValidationExceptions\ValidationException;
 use WeLiMe\Models\Entities\Conversation;
 use WeLiMe\Models\Entities\User;
-use WeLiMe\Models\HTMLFormData\LoginForm;
-use WeLiMe\Models\HTMLFormData\RegistrationForm;
+use WeLiMe\Models\HTMLFormData\LoginFormContainer;
+use WeLiMe\Models\HTMLFormData\RegistrationFormContainer;
 use WeLiMe\Repositories\ConversationRepository;
 use WeLiMe\Repositories\UserRepository;
 use WeLiMe\Validators\RegistrationFormValidator;
@@ -36,9 +36,9 @@ class UserController
     }
 
     /**
-     * @param RegistrationForm $registrationForm
+     * @param RegistrationFormContainer $registrationForm
      */
-    public function createUser(RegistrationForm $registrationForm)
+    public function createUser(RegistrationFormContainer $registrationForm)
     {
         $registrationFormValidator = new RegistrationFormValidator();
 
@@ -63,14 +63,14 @@ class UserController
     }
 
     /**
-     * @param LoginForm $loginForm
+     * @param LoginFormContainer $loginForm
      * @return User
      * @throws AuthenticationException
      */
-    public function checkLogin(LoginForm $loginForm)
+    public function checkLogin(LoginFormContainer $loginForm)
     {
         try {
-            $user = $this->userRepository->findByUsername($loginForm->getUsername());
+            $user = $this->userRepository->findOneByUsername($loginForm->getUsername());
 
             if (!password_verify($loginForm->getPassword(), $user->getPassword())) {
                 throw new AuthenticationException("Authentication failed.");
