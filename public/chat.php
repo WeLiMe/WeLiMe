@@ -10,7 +10,9 @@
 
     <link rel="Stylesheet" href="css/chat.css"/>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+
+    <script type="text/javascript" src="js/chat.js"></script>
 </head>
 
 <body>
@@ -25,16 +27,10 @@
         </ul>
     </aside>
 
-    <div class="chat">
-        <label for="txtHistory"></label>
-        <textarea class="history" id="txtHistory"></textarea>
-
-        <br/>
-
-        <label for="txtInput"></label>
-        <input type="text" class="input" id="txtInput"/>
-
-        <input type="submit" class="btnSend" value="Send"/>
+    <div id="Chat">
+        <div id="ChatMessages"></div>
+        <input type="text" id="ChatInput" name="ChatInput" title="ChatInput"/>
+        <div id="ChatConversationId" hidden>1</div>
     </div>
 
     <div class="clearDiv"></div>

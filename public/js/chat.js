@@ -1,7 +1,7 @@
 function updateHistory() {
     var chatMessagesElem = $("#ChatMessages");
-    var conversationId = $("#ChatConversationId").html();
 
+    var conversationId = $("#ChatConversationId").html();
     var lastMessageId = chatMessagesElem.find(".ChatMessage:last-child .ChatMessageId").html();
 
     if (!lastMessageId) {
