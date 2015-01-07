@@ -1,15 +1,24 @@
+function updateHistory () {
+    var chatMessagesDiv = $("#ChatMessages");
+
+    $.ajax({
+        type: 'POST',
+        async: true,
+        url: '../app/FormHandlers/GetMessagesFormHandler.php',
+        data: {ConversationId:1},
+        success:function (respose) {
+            chatMessagesDiv.html(respose);
+            chatMessagesDiv.scrollTop(chatMessagesDiv.prop("scrollHeight"));
+        }
+    });
+}
+
 $(document).ready(function () {
-    function updateHistory () {
-        $.ajax({
-            type: 'POST',
-            async: true,
-            url: '../app/FormHandlers/GetMessagesFormHandler.php',
-            data: {ConversationId:1},
-            success:function (respose) {
-                $("#ChatMessages").html(respose);
-            }
-        });
-    }
+    updateHistory();
+
+    setInterval(function () {
+        updateHistory()
+    }, 1500);
 
     $("#ChatInput").keyup(function (e) {
         if (e.keyCode == 13) {
@@ -31,10 +40,4 @@ $(document).ready(function () {
             });
         }
     });
-
-    setInterval(function () {
-        updateHistory()
-    }, 1500);
-
-    updateHistory();
 });

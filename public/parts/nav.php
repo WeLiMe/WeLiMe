@@ -8,8 +8,6 @@
 use WeLiMe\Exceptions\RepositoryExceptions\UserNotFoundException;
 use WeLiMe\Repositories\UserRepository;
 
-session_start();
-
 if (isset($_SESSION['UserUsername'])) {
     $username = $_SESSION['UserUsername'];
 
