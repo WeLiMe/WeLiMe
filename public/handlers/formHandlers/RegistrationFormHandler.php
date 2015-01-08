@@ -27,4 +27,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userController->createUser($registrationForm);
 }
 
-header("Location: ../../public/login.php");
+header("Location: ../../login.php");
