@@ -25,7 +25,7 @@ if (!isset($_SESSION['UserUsername'])) {
 <main>
     <h3>Login...</h3>
 
-    <form name="loginForm" id="loginForm" action="FormHandlers/LoginFormHandler.php" method="post">
+    <form name="loginForm" id="loginForm" action="handlers/formHandlers/LoginFormHandler.php" method="post">
         <table>
             <tr>
                 <td><label for="txtUsername">Username:</label></td>

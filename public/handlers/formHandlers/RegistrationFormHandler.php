@@ -6,7 +6,7 @@
  * Time: 12:18 AM
  */
 
-require_once __DIR__ . '/../../bootstrap.php';
+require_once __DIR__ . '/../../../bootstrap.php';
 
 use WeLiMe\Controllers\UserController;
 use WeLiMe\Models\HTMLFormData\RegistrationFormContainer;

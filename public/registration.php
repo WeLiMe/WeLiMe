@@ -25,7 +25,7 @@ if (!isset($_SESSION['UserUsername'])) {
 <main>
     <h3>Registration...</h3>
 
-    <form name="registrationForm" id="registrationForm" action="FormHandlers/RegistrationFormHandler.php" method="post">
+    <form name="registrationForm" id="registrationForm" action="handlers/formHandlers/RegistrationFormHandler.php" method="post">
         <table>
             <tr>
                 <td><label for="txtUsername">Username:</label></td>

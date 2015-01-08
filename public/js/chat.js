@@ -14,7 +14,7 @@ function updateHistory() {
     $.ajax({
         type: 'POST',
         async: true,
-        url: 'AjaxHandlers/GetMessagesHandler.php',
+        url: 'handlers/ajaxHandlers/GetMessagesHandler.php',
         data: {
             ConversationId: conversationId,
             LastMessageId: lastMessageId
@@ -40,7 +40,7 @@ function updateFriendList() {
     $.ajax({
         type: 'POST',
         async: true,
-        url: 'AjaxHandlers/GetOnlineUsersHandler.php',
+        url: 'handlers/ajaxHandlers/GetOnlineUsersHandler.php',
         success: function (respose) {
             if (respose.trim()) {
                 if (friendListElement.html().trim() != respose.trim()) {
@@ -61,7 +61,7 @@ function startConversation(username) {
     $.ajax({
         type: 'POST',
         async: true,
-        url: 'AjaxHandlers/GetConversationHandler.php',
+        url: 'handlers/ajaxHandlers/GetConversationHandler.php',
         data: {Usernames: username},
         success: function (respose) {
             if (respose.trim()) {
@@ -79,7 +79,7 @@ function updateTimestamp() {
     $.ajax({
         type: 'POST',
         async: true,
-        url: 'AjaxHandlers/StillAliveHandler.php'
+        url: 'handlers/ajaxHandlers/StillAliveHandler.php'
     });
 }
 
@@ -95,7 +95,7 @@ $(document).ready(function () {
             $.ajax({
                 type: 'POST',
                 async: true,
-                url: 'AjaxHandlers/SendMessageHandler.php',
+                url: 'handlers/ajaxHandlers/SendMessageHandler.php',
                 data: {
                     ConversationId: conversationId,
                     ChatInput: chatInput

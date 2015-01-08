@@ -21,14 +21,15 @@
 <?php require_once __DIR__ . "/parts/nav.php"; ?>
 
 <main>
-    <h2>Welcome to your WebLiveMessenger!</h2>
-
     <?php if (isset($_SESSION['UserUsername'])) { ?>
     <div id="Chat">
+        <div id="ChatConversationName">Public</div>
         <div id="ChatMessages"></div>
         <input type="text" id="ChatInput" name="ChatInput" title="ChatInput"/>
         <div class="ChatConversationId" hidden>1</div>
     </div>
+    <?php } else { ?>
+    <h2>Welcome to your WebLiveMessenger!</h2>
     <?php } ?>
 </main>
 

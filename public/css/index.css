@@ -3,12 +3,26 @@ main h2 {
 }
 
 #Chat {
-    margin: 0 auto 20px auto;
+    margin: 0 auto;
     padding: 0;
 
     width: 450px;
 
     border: solid thin gray;
+}
+
+#ChatConversationName {
+    margin: 3px 0;
+    padding: 0;
+
+    height: 23px;
+
+    text-align: center;
+
+    font-size: larger;
+    font-style: italic;
+
+    border-bottom: solid thin gray;
 }
 
 #ChatMessages {
