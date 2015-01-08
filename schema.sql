@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 07, 2015 at 07:55 PM
+-- Generation Time: Jan 08, 2015 at 06:39 AM
 -- Server version: 5.5.40-0ubuntu0.12.04.1
 -- PHP Version: 5.6.4-1+deb.sury.org~precise+1
 
@@ -64,7 +64,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `first_name` varchar(45) COLLATE utf8_bin NOT NULL,
   `last_name` varchar(45) COLLATE utf8_bin NOT NULL,
   `email` varchar(45) COLLATE utf8_bin NOT NULL,
-  `password` varchar(255) COLLATE utf8_bin DEFAULT NULL
+  `password` varchar(255) COLLATE utf8_bin NOT NULL,
+  `last_updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
