@@ -14,17 +14,71 @@ function updateHistory() {
     $.ajax({
         type: 'POST',
         async: true,
-        url: '../app/AjaxHandlers/GetMessagesHandler.php',
+        url: 'AjaxHandlers/GetMessagesHandler.php',
         data: {
             ConversationId: conversationId,
             LastMessageId: lastMessageId
         },
         success: function (respose) {
-            if (respose.trim()) {
+            var newLastMessageId = chatMessagesElem.find(".ChatMessage:last-child .ChatMessageId").html();
+
+            if (!newLastMessageId) {
+                newLastMessageId = 0;
+            }
+
+            if (respose.trim() && (newLastMessageId == lastMessageId)) {
                 chatMessagesElem.html(chatMessagesElem.html() + respose);
                 chatMessagesElem.scrollTop(chatMessagesElem.prop("scrollHeight"));
             }
         }
+    });
+}
+
+function updateFriendList() {
+    var friendListElement = $("#FriendList");
+
+    $.ajax({
+        type: 'POST',
+        async: true,
+        url: 'AjaxHandlers/GetOnlineUsersHandler.php',
+        success: function (respose) {
+            if (respose.trim()) {
+                if (friendListElement.html().trim() != respose.trim()) {
+                    friendListElement.html(respose);
+                }
+            } else {
+                friendListElement.html("<div class=\"Friend\">Forever alone...</div>");
+            }
+        }
+    });
+}
+
+function startConversation(username) {
+    var chatMessagesElement = $("#ChatMessages");
+    var chatConversationIdElement = $("#Chat").find(".ChatConversationId");
+    var chatInputElement = $("#ChatInput");
+
+    $.ajax({
+        type: 'POST',
+        async: true,
+        url: 'AjaxHandlers/GetConversationHandler.php',
+        data: {Usernames: username},
+        success: function (respose) {
+            if (respose.trim()) {
+                chatMessagesElement.html("");
+                chatConversationIdElement.html(respose);
+                chatInputElement.prop("readonly", false);
+                updateHistory();
+            }
+        }
+    });
+}
+
+function updateTimestamp() {
+    $.ajax({
+        type: 'POST',
+        async: true,
+        url: 'AjaxHandlers/StillAliveHandler.php'
     });
 }
 
@@ -40,7 +94,7 @@ $(document).ready(function () {
             $.ajax({
                 type: 'POST',
                 async: true,
-                url: '../app/AjaxHandlers/SendMessageHandler.php',
+                url: 'AjaxHandlers/SendMessageHandler.php',
                 data: {
                     ConversationId: conversationId,
                     ChatInput: chatInput
@@ -53,13 +107,23 @@ $(document).ready(function () {
         }
     });
 
+    if ($("#FriendList").length) {
+        updateFriendList();
+    }
+
     if (chatConversationIdElement.html().trim()) {
         updateHistory();
     }
 
     setInterval(function () {
+        if ($("#FriendList").length) {
+            updateFriendList();
+        }
+
         if (chatConversationIdElement.html().trim()) {
             updateHistory();
         }
+
+        updateTimestamp();
     }, 1000);
 });

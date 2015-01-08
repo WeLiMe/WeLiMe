@@ -1,4 +1,10 @@
-<?php require_once __DIR__ . '/../bootstrap.php'; session_start(); ?>
+<?php require_once __DIR__ . '/../bootstrap.php'; session_start();
+
+if (!isset($_SESSION['UserUsername'])) {
+    header("Location: index.php");
+}
+
+?>
 
 <!doctype html>
 <html lang="en">
@@ -19,7 +25,7 @@
 <main>
     <h3>Login...</h3>
 
-    <form name="loginForm" id="loginForm" action="../app/FormHandlers/LoginFormHandler.php" method="post">
+    <form name="loginForm" id="loginForm" action="FormHandlers/LoginFormHandler.php" method="post">
         <table>
             <tr>
                 <td><label for="txtUsername">Username:</label></td>

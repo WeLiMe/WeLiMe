@@ -27,7 +27,7 @@ a:hover
 
 /* Header */
 
-header {
+body > header {
     margin: 10px 0 10px 0;
     padding-left: 10px;
 
@@ -36,7 +36,7 @@ header {
     border-bottom: solid thin gray;
 }
 
-header #logo {
+body > header #logo {
     float: left;
 
     font-size: 30px;
@@ -44,7 +44,7 @@ header #logo {
     font-style: italic;
 }
 
-header #createConversationForm {
+body > header #createConversationForm {
     float: right;
 
     padding-top: 5px;
@@ -52,7 +52,7 @@ header #createConversationForm {
 
 /* Navigation */
 
-nav {
+body > nav {
     margin: 10px 0 10px 0;
 
     line-height: 180%;
@@ -60,7 +60,7 @@ nav {
     border: solid thin gray;
 }
 
-nav #navigation {
+body > nav #navigation {
     float: left;
 
     margin: 0;
@@ -69,7 +69,7 @@ nav #navigation {
     text-align: left;
 }
 
-nav #actions {
+body > nav #actions {
     float: right;
 
     margin: 0;
@@ -80,14 +80,16 @@ nav #actions {
 
 /* Main Section */
 
-main {
+body > main {
+    padding: 0 10px 0 10px;
+
     border-left: solid thin gray;
     border-right: solid thin gray;
 }
 
 /* Footer */
 
-footer {
+body > footer {
     clear: both;
 
     margin: 10px 0 10px 0;
