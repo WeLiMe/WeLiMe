@@ -29,26 +29,26 @@
 }
 
 /*#ConversationList {*/
-    /*float: right;*/
+/*float: right;*/
 
-    /*margin: 0;*/
-    /*padding: 0;*/
+/*margin: 0;*/
+/*padding: 0;*/
 
-    /*width: 178px;*/
-    /*height: auto;*/
+/*width: 178px;*/
+/*height: auto;*/
 
-    /*border-top: solid thin gray;*/
-    /*border-right: solid thin gray;*/
-    /*border-bottom: solid thin gray;*/
+/*border-top: solid thin gray;*/
+/*border-right: solid thin gray;*/
+/*border-bottom: solid thin gray;*/
 /*}*/
 
 /*#ConversationList .Conversation {*/
-    /*margin: 5px;*/
-    /*padding-left: 5px;*/
+/*margin: 5px;*/
+/*padding-left: 5px;*/
 
-    /*background-color: lavender;*/
+/*background-color: lavender;*/
 
-    /*border-right: solid thin gray;*/
+/*border-right: solid thin gray;*/
 /*}*/
 
 #Chat {
@@ -60,9 +60,23 @@
     border: solid thin gray;
 }
 
+#ChatConversationName {
+    margin: 3px 0;
+    padding: 0;
+
+    height: 23px;
+
+    text-align: center;
+
+    font-size: larger;
+    font-style: italic;
+
+    border-bottom: solid thin gray;
+}
+
 #ChatMessages {
     width: 500px;
-    height: 350px;
+    height: 300px;
 
     border-bottom: solid thin gray;
 

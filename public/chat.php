@@ -33,9 +33,10 @@ if (!isset($_SESSION['UserUsername'])) {
         <!--<aside id="ConversationList"></aside>-->
 
         <main id="Chat">
+            <div id="ChatConversationName">Select person...</div>
             <div id="ChatMessages"></div>
             <input type="text" id="ChatInput" name="ChatInput" title="ChatInput" readonly/>
-            <div class="ChatConversationId" hidden></div>
+            <div class="ChatConversationId" hidden="hidden"></div>
         </main>
 
         <div class="clearDiv"></div>

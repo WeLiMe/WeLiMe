@@ -20,9 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         foreach ($users as $user) {
             echo("<a href=\"javascript:void(0);\" onclick=\"startConversation('" . $user->getUsername() . "');\">\n");
-            echo("\t<div class=\"Friend\">");
+            echo("\t<div class=\"Friend\">\n");
             echo("\t\t<div class=\"FriendName\">" . $user->getFirstName() . " " . $user->getLastName() . "</div>\n");
-//            echo("\t\t<div class=\"FriendUsername\" hidden>" . $user->getUsername() . "</div>\n");
+            echo("\t\t<div class=\"FriendUsername\" hidden=\"hidden\">" . $user->getUsername() . "</div>\n");
             echo("\t</div>\n");
             echo("</a>\n");
         }

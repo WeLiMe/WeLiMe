@@ -68,6 +68,7 @@ function startConversation(username) {
                 chatMessagesElement.html("");
                 chatConversationIdElement.html(respose);
                 chatInputElement.prop("readonly", false);
+                $("#ChatConversationName").html($('.FriendUsername:contains("' + username + '")').parent().find(".FriendName").html());
                 updateHistory();
             }
         }
