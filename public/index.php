@@ -23,7 +23,7 @@
 <main>
     <?php if (isset($_SESSION['UserUsername'])) { ?>
     <div id="Chat">
-        <div id="ChatConversationName">Public</div>
+        <div id="ChatConversationName">Public Chat...</div>
         <div id="ChatMessages"></div>
         <input type="text" id="ChatInput" name="ChatInput" title="ChatInput"/>
         <div class="ChatConversationId" hidden>1</div>

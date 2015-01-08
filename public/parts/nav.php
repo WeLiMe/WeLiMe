@@ -2,7 +2,7 @@
     <div id="navigation">
         <a href="index.php">Home</a>
 <?php if (isset($_SESSION['UserUsername'])) {
-    echo("\t&emsp;|&emsp;<a href=\"chat.php\">Chat</a>\n");
+    echo("\t&emsp;|&emsp;<a href=\"chat.php\">Private Chat</a>\n");
 } ?>
     </div>
     <div id="actions">
