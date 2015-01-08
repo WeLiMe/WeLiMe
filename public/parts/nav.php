@@ -20,7 +20,7 @@ if (isset($_SESSION['UserUsername'])) {
         die($e->getMessage());
     }
 
-    echo("\tLogged in as <a href=\"\">" . $user->getFirstName() . " " . $user->getLastName() . "</a>&emsp;|&emsp;\n");
+    echo("\tLogged in as <a href=\"\" title=\"" . $_SESSION['UserUsername'] . "\">" . $user->getFirstName() . " " . $user->getLastName() . "</a>&emsp;|&emsp;\n");
     echo("\t<a href=\"logout.php\">Logout</a>\n");
  } else {
     echo("\t<a href=\"login.php\">Login</a>&emsp;|&emsp;\n");
