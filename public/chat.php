@@ -1,4 +1,10 @@
-<?php require_once __DIR__ . '/../bootstrap.php'; session_start(); ?>
+<?php require_once __DIR__ . '/../bootstrap.php'; session_start();
+
+if (!isset($_SESSION['UserUsername'])) {
+    header("Location: index.php");
+}
+
+?>
 
 <!doctype html>
 <html lang="en">
@@ -12,7 +18,11 @@
 
     <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 
+    <script type="text/javascript" src="js/stillAlive.js"></script>
+
     <script type="text/javascript" src="js/chat.js"></script>
+
+    <script type="text/javascript" src="js/chatManager.js"></script>
 </head>
 
 <body>
@@ -21,19 +31,19 @@
 <?php require_once __DIR__ . "/parts/nav.php"; ?>
 
 <main>
-    <aside id="friendList">
-        <ul>
-            <li><a href="#">All</a></li>
-        </ul>
-    </aside>
+    <section id="App">
+        <aside id="FriendList"></aside>
 
-    <div id="Chat">
-        <div id="ChatMessages"></div>
-        <input type="text" id="ChatInput" name="ChatInput" title="ChatInput"/>
-        <div id="ChatConversationId" hidden>1</div>
-    </div>
+        <!--<aside id="ConversationList"></aside>-->
 
-    <div class="clearDiv"></div>
+        <main id="Chat">
+            <div id="ChatMessages"></div>
+            <input type="text" id="ChatInput" name="ChatInput" title="ChatInput" readonly/>
+            <div class="ChatConversationId" hidden></div>
+        </main>
+
+        <div class="clearDiv"></div>
+    </section>
 </main>
 
 <?php require_once __DIR__ . "/parts/footer.php"; ?>

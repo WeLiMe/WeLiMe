@@ -63,6 +63,70 @@ class ConversationRepository
     }
 
     /**
+     * @param int $userId
+     * @return Conversation[]
+     */
+    public function findAllByUserId($userId)
+    {
+        $stmt = $this->db->prepare(
+            "SELECT * FROM user WHERE `id` = :id LIMIT 1"
+        );
+
+        $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() == 0) throw new UserNotFoundException("User not found with username: " . $userId . ".");
+
+        $stmt = $this->db->prepare(
+            "SELECT * FROM conversation WHERE `id` IN (SELECT `conversation_id` FROM user_conversation WHERE `user_id` = :id)"
+        );
+
+        $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        $results = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        $conversations = array();
+
+        foreach ($results as $row) {
+            $conversation = new Conversation(
+                $row->id,
+                $row->name
+            );
+
+            array_push($conversations, $conversation);
+        }
+
+        return $conversations;
+    }
+
+    /**
+     * @param User[] $users
+     * @return Conversation
+     */
+    public function checkIfConversationExists($users)
+    {
+        $stmt = $this->db->prepare("SELECT `conversation_id` FROM user_conversation WHERE conversation_id != 1 AND (user_id = :userId1 OR user_id = :userId2) GROUP BY conversation_id HAVING COUNT(DISTINCT user_id) = 2 LIMIT 1");
+
+        $stmt->bindParam(':userId1', $users[0]->getId(), PDO::PARAM_INT);
+        $stmt->bindParam(':userId2', $users[1]->getId(), PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_OBJ);
+
+        $conversation = null;
+
+        if ($row->conversation_id) {
+            $conversation = $this->findOneById($row->conversation_id);
+        }
+
+        return $conversation;
+    }
+
+    /**
      * @param int $id
      * @return Conversation
      * @throws ConversationNotFoundException
@@ -85,45 +149,5 @@ class ConversationRepository
         );
 
         return $conversation;
-    }
-
-    /**
-     * @param int $userId
-     * @return Conversation[]
-     */
-    public function findAllByUserId($userId)
-    {
-        $stmt = $this->db->prepare(
-            "SELECT * FROM user WHERE `id` = :id LIMIT 1"
-        );
-
-        $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
-
-        $stmt->execute();
-
-        if ($stmt->rowCount()) throw new UserNotFoundException("User not found with username: " . $userId . ".");
-
-        $stmt = $this->db->prepare(
-            "SELECT * FROM conversation WHERE `id` IN (SELECT `conversation_id` FROM user_conversation WHERE `user_id` = :id)"
-        );
-
-        $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
-
-        $stmt->execute();
-
-        $results = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-        $conversations = array();
-
-        $conversation = new Conversation();
-
-        foreach ($results as $row) {
-            $conversation->setId($row->id);
-            $conversation->setName($row->name);
-
-            array_push($conversations, $conversation);
-        }
-
-        return $conversations;
     }
 }

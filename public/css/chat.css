@@ -1,27 +1,101 @@
-main aside {
-    float: left;
+#App {
+    margin: auto;
+    padding: 0;
 
-    width: 150px;
+    width: 680px;
 }
 
-main .chat {
+#FriendList {
     float: left;
 
-    margin-left: 10px;
+    margin: 0;
+    padding: 0;
 
-    width: 200px;
+    width: 178px;
+    height: auto;
+
+    border-top: solid thin gray;
+    border-left: solid thin gray;
+    border-bottom: solid thin gray;
 }
 
-main .chat .history {
-    width: 200px;
-    height: 200px;
+#FriendList .Friend {
+    margin: 5px;
+    padding-left: 5px;
+
+    background-color: lavender;
+
+    border-right: solid thin gray;
+}
+
+/*#ConversationList {*/
+    /*float: right;*/
+
+    /*margin: 0;*/
+    /*padding: 0;*/
+
+    /*width: 178px;*/
+    /*height: auto;*/
+
+    /*border-top: solid thin gray;*/
+    /*border-right: solid thin gray;*/
+    /*border-bottom: solid thin gray;*/
+/*}*/
+
+/*#ConversationList .Conversation {*/
+    /*margin: 5px;*/
+    /*padding-left: 5px;*/
+
+    /*background-color: lavender;*/
+
+    /*border-right: solid thin gray;*/
+/*}*/
+
+#Chat {
+    margin: 0 0 0 179px;
+    padding: 0;
+
+    width: 500px;
 
     border: solid thin gray;
 }
 
-main .chat .input {
-    width: 144px;
+#ChatMessages {
+    width: 500px;
+    height: 350px;
+
+    border-bottom: solid thin gray;
+
+    overflow-y: auto;
 }
 
-main .chat .btnSend {
+#ChatInput {
+    padding-left: 3px;
+
+    width: 496px;
+    height: 20px;
+
+    border: none;
+}
+
+#ChatInput:focus {
+    outline: none;
+}
+
+.ChatMessage {
+    margin: 10px;
+}
+
+.ChatMessageName {
+    color: #36F;
+}
+
+.ChatMessageSentTime {
+    font-size: smaller;
+    font-style: italic;
+}
+
+.ChatMessageContent {
+    font-family: "Tahoma", "sans-serif";
+    font-weight: bold;
 }

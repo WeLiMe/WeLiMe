@@ -12,7 +12,7 @@ use WeLiMe\Exceptions\DatabaseExceptions\DatabaseConnectionException;
 use WeLiMe\Exceptions\RepositoryExceptions\ConversationNotFoundException;
 use WeLiMe\Exceptions\RepositoryExceptions\UserNotFoundException;
 use WeLiMe\Models\Entities\Message;
-use WeLiMe\Models\HTMLFormData\GetMessagesContainer;
+use WeLiMe\Models\HTMLFormData\GetMessageContainer;
 use WeLiMe\Models\HTMLFormData\SendMessageContainer;
 use WeLiMe\Repositories\MessageRepository;
 use WeLiMe\Repositories\UserRepository;
@@ -48,7 +48,7 @@ class MessageController
     /**
      * @param int $id
      * @param $messageId
-     * @return GetMessagesContainer[]
+     * @return GetMessageContainer[]
      */
     public function getMessagesOfConversation($id, $messageId)
     {
@@ -67,7 +67,7 @@ class MessageController
                 die($e->getMessage());
             }
 
-            $messageContainer = new GetMessagesContainer(
+            $messageContainer = new GetMessageContainer(
                 $message->getId(),
                 $user->getFirstName(),
                 $user->getLastName(),

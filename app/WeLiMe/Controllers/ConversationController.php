@@ -11,7 +11,7 @@ namespace WeLiMe\Controllers;
 use WeLiMe\Exceptions\DatabaseExceptions\DatabaseConnectionException;
 use WeLiMe\Exceptions\RepositoryExceptions\UserNotFoundException;
 use WeLiMe\Models\Entities\Conversation;
-use WeLiMe\Models\HTMLFormData\CreateConversationFormContainer;
+use WeLiMe\Models\HTMLFormData\CreateConversationContainer;
 use WeLiMe\Repositories\ConversationRepository;
 use WeLiMe\Repositories\UserRepository;
 
@@ -31,26 +31,42 @@ class ConversationController
     }
 
     /**
-     * @param CreateConversationFormContainer $createConversationContainer
+     * @param CreateConversationContainer $createConversationContainer
+     * @return Conversation
      */
-    public function createConversation(CreateConversationFormContainer $createConversationContainer)
+    public function createConversation(CreateConversationContainer $createConversationContainer)
     {
         $usernames = preg_replace('/\s+/', '', $createConversationContainer->getInitiatorUsername() . ", " . $createConversationContainer->getUsernames());
 
         $usernamesArray = explode(",", $usernames);
 
-        $conversation = $this->conversationRepository->save(new Conversation());
-
-        $user = null;
+        $users = array();
 
         foreach ($usernamesArray as $username) {
             try {
                 $user = $this->userRepository->findOneByUsername($username);
-                $this->conversationRepository->addUserToConversation($user, $conversation);
+                array_push($users, $user);
             } catch (UserNotFoundException $e) {
                 // Do nothing...
             }
         }
+
+        $conversation = $this->conversationRepository->checkIfConversationExists($users);
+
+        if (!$conversation) {
+
+            $conversation = $this->conversationRepository->save(new Conversation());
+
+            foreach ($users as $user) {
+                try {
+                    $this->conversationRepository->addUserToConversation($user, $conversation);
+                } catch (UserNotFoundException $e) {
+                    // Do nothing...
+                }
+            }
+        }
+
+        return $conversation;
     }
 
     /**

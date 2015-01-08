@@ -8,7 +8,7 @@
 
 namespace WeLiMe\Models\HTMLFormData;
 
-class CreateConversationFormContainer
+class CreateConversationContainer
 {
     /** @var string */
     private $initiatorUsername;

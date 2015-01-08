@@ -134,15 +134,78 @@ class UserRepository
 
         $users = array();
 
-        $user = new User();
+        foreach ($results as $row) {
+            $user = new User(
+                $row->id,
+                $row->username,
+                $row->first_name,
+                $row->last_name,
+                $row->email,
+                $row->password
+            );
+
+            array_push($users, $user);
+        }
+
+        return $users;
+    }
+
+    /**
+     * @param string $username
+     * @return bool
+     */
+    public function updateTimestampByUsername($username)
+    {
+        $stmt = $this->db->prepare(
+            "UPDATE user SET `last_updated_time` = NOW() WHERE `username` = :username"
+        );
+
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() == 0) throw new UserNotFoundException("User not found with username: " . $username . ".");
+
+        return true;
+    }
+
+    /**
+     * @param int $id
+     * @return User[]
+     */
+    public function getActiveUsers($id)
+    {
+        $stmt = $this->db->prepare(
+            "SELECT * FROM user WHERE `id` = :id LIMIT 1"
+        );
+
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() == 0) throw new ConversationNotFoundException("Conversation not found with id: " . $id . ".");
+
+        $stmt = $this->db->prepare(
+            "SELECT * FROM user WHERE TIMESTAMPDIFF(SECOND, `last_updated_time`, NOW()) <= 5 AND `id` != :id"
+        );
+
+        $stmt->bindParam(':id', $id);
+
+        $stmt->execute();
+
+        $results = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        $users = array();
 
         foreach ($results as $row) {
-            $user->setId($row->id);
-            $user->setUsername($row->username);
-            $user->setFirstName($row->first_name);
-            $user->setLastName($row->last_name);
-            $user->setEmail($row->email);
-            $user->setPassword($row->password);
+            $user = new User(
+                $row->id,
+                $row->username,
+                $row->first_name,
+                $row->last_name,
+                $row->email,
+                $row->password
+            );
 
             array_push($users, $user);
         }

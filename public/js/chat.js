@@ -1,7 +1,10 @@
+/**
+ * Created by a4i on 1/6/15.
+ */
 function updateHistory() {
     var chatMessagesElem = $("#ChatMessages");
 
-    var conversationId = $("#ChatConversationId").html();
+    var conversationId = $("#Chat").find(".ChatConversationId").html();
     var lastMessageId = chatMessagesElem.find(".ChatMessage:last-child .ChatMessageId").html();
 
     if (!lastMessageId) {
@@ -27,11 +30,12 @@ function updateHistory() {
 
 $(document).ready(function () {
     var chatInputElement = $("#ChatInput");
+    var chatConversationIdElement = $("#Chat").find(".ChatConversationId");
 
     chatInputElement.keyup(function (e) {
-        if (e.keyCode == 13 && chatInputElement.val().trim()) {
-            var conversationId = $("#ChatConversationId").html();
+        if (e.keyCode == 13 && chatConversationIdElement.html().trim() && chatInputElement.val().trim()) {
             var chatInput = chatInputElement.val();
+            var conversationId = chatConversationIdElement.html().trim();
 
             $.ajax({
                 type: 'POST',
@@ -49,9 +53,13 @@ $(document).ready(function () {
         }
     });
 
-    updateHistory();
+    if (chatConversationIdElement.html().trim()) {
+        updateHistory();
+    }
 
     setInterval(function () {
-        updateHistory()
+        if (chatConversationIdElement.html().trim()) {
+            updateHistory();
+        }
     }, 1000);
 });

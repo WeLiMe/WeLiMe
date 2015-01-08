@@ -14,13 +14,15 @@ require_once __DIR__ . '/../../bootstrap.php';
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $sendMessageContainer = new SendMessageContainer(
-        $_SESSION['UserId'],
-        $_POST['ConversationId'],
-        $_POST['ChatInput']
-    );
+    if (isset($_SESSION['UserUsername'])) {
+        $sendMessageContainer = new SendMessageContainer(
+            $_SESSION['UserId'],
+            $_POST['ConversationId'],
+            $_POST['ChatInput']
+        );
 
-    $messageController = new MessageController();
+        $messageController = new MessageController();
 
-    $messageController->createMessage($sendMessageContainer);
+        $messageController->createMessage($sendMessageContainer);
+    }
 }

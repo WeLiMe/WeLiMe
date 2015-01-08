@@ -1,7 +1,8 @@
 body {
-    margin: 0;
+    margin: 0 10px 0 10px;
 
     width: auto;
+    min-width: 720px;
 
     color: #232323;
 
@@ -27,7 +28,7 @@ a:hover
 /* Header */
 
 header {
-    margin: 10px;
+    margin: 10px 0 10px 0;
     padding-left: 10px;
 
     height: 45px;
@@ -52,7 +53,7 @@ header #createConversationForm {
 /* Navigation */
 
 nav {
-    margin: 10px;
+    margin: 10px 0 10px 0;
 
     line-height: 180%;
 
@@ -80,12 +81,6 @@ nav #actions {
 /* Main Section */
 
 main {
-    clear: both;
-
-    margin: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-
     border-left: solid thin gray;
     border-right: solid thin gray;
 }
@@ -95,7 +90,7 @@ main {
 footer {
     clear: both;
 
-    margin: 10px;
+    margin: 10px 0 10px 0;
 
     line-height: 180%;
     text-align: center;
