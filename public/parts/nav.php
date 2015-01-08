@@ -2,7 +2,6 @@
     <div id="navigation">
         <a href="index.php">Home</a>
 <?php
-use WeLiMe\Controllers\UserController;
 use WeLiMe\Exceptions\RepositoryExceptions\UserNotFoundException;
 use WeLiMe\Repositories\UserRepository;
 
